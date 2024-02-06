@@ -1,0 +1,66 @@
+﻿@page "/categorias/list"
+@using RestauranteApp.Shared
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>Categoria</h3>
+<hr />
+<a href="categorias/crear" class="btn btn-success">Nuevo <Icon Name="IconName.Clipboard2Fill" /></a>
+<br />
+<br />
+
+
+@if (_categorias == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table table-hover table-bordered table-striped">
+        <thead class="color-font">
+            <tr>
+                <th>Id:</th>
+                <th>Descripcion:</th>
+                <th>Observacion:</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in _categorias)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Nombre</td>
+                    <td>@item.Observacion</td>
+                    <td>
+                        <Button Class="colorEditar" @onclick="()=>Editar(item.Id)"><Icon Name="IconName.PenFill" /></Button>
+                        <Button Class="colorEliminar" @onclick="()=>Eliminar(item.Id)"><Icon Name="IconName.TrashFill" /></Button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+
+@code {
+    private CategoriaDto[]? _categorias;
+    protected override async Task OnInitializedAsync()
+    {
+        await Cargar();
+    }
+    private async Task Cargar()
+    {
+        _categorias = await Http.GetFromJsonAsync<CategoriaDto[]>("api/categorias");
+    }
+    private void Editar(int id)
+    {
+        NavigationManager.NavigateTo($"categorias/editar/{id}");
+    }
+    private async void Eliminar(int id)
+    {
+        await Http.DeleteAsync($"api/categorias/{id}");
+        await Cargar();
+    }
+}

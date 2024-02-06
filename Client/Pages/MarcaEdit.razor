@@ -1,0 +1,31 @@
+﻿@page "/marcas/editar/{id:int}"
+@using RestauranteApp.Shared
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>Marca</h3>
+<hr />
+
+<MarcaEditPage Marca="Registro" OnGrabar="Actualizar"></MarcaEditPage>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    public MarcaDto Registro { get; set; } = new();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var response = await Http.GetFromJsonAsync<MarcaDto>($"api/marcas/{id}");
+        if (response is not null)
+        {
+            Registro = response;
+        }
+    }
+    private async Task Actualizar()
+    {
+        await Http.PutAsJsonAsync($"api/marcas/{id}", Registro);
+        NavigationManager.NavigateTo("/marcas/list");
+    }
+
+}

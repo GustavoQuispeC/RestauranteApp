@@ -21,7 +21,7 @@
 
 </div>
 
-<Modal IsServiceModal="true" />
+<Modal IsServiceModal="false" />
 <Preload />
 <Toasts class="p-3" AutoHide="true" Delay="4000" Placement="ToastsPlacement.TopRight" />
 
@@ -42,9 +42,11 @@
         navItems = new List<NavItem>
         {
             new NavItem { Id = "1", Href = "/", IconName = IconName.HouseDoorFill, Text = "Home", Match=NavLinkMatch.All},
-            new NavItem { Id = "2", Href = "/counter", IconName = IconName.PlusSquareFill, Text = "Counter"},
-            new NavItem { Id = "3", Href = "/fetchdata", IconName = IconName.Table, Text = "Fetch Data"},
-            new NavItem { Id = "4", Href = "/proveedores/list", IconName = IconName.Person, Text = "Proveedor"},
+            new NavItem { Id = "2", Href = "/proveedores/list", IconName = IconName.Person, Text = "Proveedor"},
+            new NavItem { Id = "3", Href = "/categorias/list", IconName = IconName.Person, Text = "Categoria"},
+            new NavItem { Id = "4", Href = "/marcas/list", IconName = IconName.Person, Text = "Marca"},
+            new NavItem { Id = "5", Href = "/tipopagos/list", IconName = IconName.Person, Text = "Tipo de Pago"}
+            
         };
 
         return navItems;

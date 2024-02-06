@@ -4,42 +4,8 @@
 @inject NavigationManager NavigationManager
 
 <h3>Proveedor</h3>
-<hr />
-<EditForm Model="Proveedor" OnSubmit="Grabar">
-    <div class="row row-cols-1 row-cols-md-2">
-        <div class="col>">
-            <div class="mb-3 row">
-                <label class="form-label" form="RazonSocial">Razón Social:</label>
-                <input type="text" id="RazonSocial" class="form-control" @bind-value="Proveedor.RazonSocial" />
-            </div>
-            <div class="mb-3 row">
-                <label class="form-label" form="Nombres">Nombres:</label>
-                <input type="text" id="Nombres" class="form-control" @bind-value="Proveedor.Nombres" />
-            </div>
-            <div class="mb-3 row">
-                <label class="form-label" form="Apellidos">Apellidos:</label>
-                <input type="text" id="Apellidos" class="form-control" @bind-value="Proveedor.Apellidos" />
-            </div>
-            <div class="mb-3 row">
-                <label class="form-label" form="Telefono">Teléfono:</label>
-                <input type="text" id="Telefono" class="form-control" @bind-value="Proveedor.Telefono" />
-            </div>
-            <div class="mb-3 row">
-                <label class="form-label" form="Correo">Correo:</label>
-                <input type="email" id="Correo" class="form-control" @bind-value="Proveedor.Email" />
-            </div>
-            <div class="mb-3 row">
-                <label class="form-label" form="Observacion">Observación:</label>
-                <input type="text" id="Observacion" class="form-control" @bind-value="Proveedor.Observacion" />
-            </div>
-        </div>
+<ProveedorEditPage Proveedor="Proveedor" OnGrabar="Grabar"></ProveedorEditPage>
 
-    </div>
-    <div class="row row-cols-1">
-        <Button Type="ButtonType.Submit" Class="btn btn-primary w-25">Grabar</Button>
-    </div>
-
-</EditForm>
 
 @code {
     public ProveedorDto Proveedor { get; set; } = new ProveedorDto();

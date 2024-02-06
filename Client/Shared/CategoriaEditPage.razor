@@ -1,0 +1,33 @@
+﻿@using RestauranteApp.Shared
+
+<EditForm Model="Categoria" OnSubmit="Grabar">
+    <div class="row row-cols-1 row-cols-md-2">
+        <div class="col>">
+            <div class="mb-3 row">
+                <label class="form-label" form="Nombre">Descripción:</label>
+                <input type="text" id="Nombre" class="form-control" @bind-value="Categoria.Nombre" />
+            </div>
+            <div class="mb-3 row">
+                <label class="form-label" form="Observacion">Observación:</label>
+                <input type="text" id="Observacion" class="form-control" @bind-value="Categoria.Observacion" />
+            </div>
+        </div>
+
+    </div>
+    <div class="row row-cols-1">
+        <Button Type="ButtonType.Submit" Class="btn btn-primary w-25">Grabar</Button>
+    </div>
+
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public CategoriaDto Categoria { get; set; } = new CategoriaDto();
+    [Parameter]
+    public EventCallback OnGrabar { get; set; }
+    private void Grabar()
+    {
+        OnGrabar.InvokeAsync();
+    }
+}

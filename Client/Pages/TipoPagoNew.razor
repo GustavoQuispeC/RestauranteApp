@@ -1,0 +1,17 @@
+﻿@page "/tipopagos/crear"
+@using RestauranteApp.Shared
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>Tipo de Pagos</h3>
+<TipoPagoEditPage TipoPago="TipoPago" OnGrabar="Grabar"></TipoPagoEditPage>
+
+@code {
+    public TipoPagoDto TipoPago { get; set; } = new TipoPagoDto();
+    private async Task Grabar()
+    {
+        await Http.PostAsJsonAsync("api/tipopagos", TipoPago);
+        NavigationManager.NavigateTo("/tipopagos/list");
+    }
+
+}

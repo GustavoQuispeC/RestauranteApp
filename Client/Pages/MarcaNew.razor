@@ -1,0 +1,17 @@
+﻿@page "/marcas/crear"
+@using RestauranteApp.Shared
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>Marca</h3>
+<MarcaEditPage Marca="Marca" OnGrabar="Grabar"></MarcaEditPage>
+
+@code {
+    public MarcaDto Marca { get; set; } = new MarcaDto();
+    private async Task Grabar()
+    {
+        await Http.PostAsJsonAsync("api/marcas", Marca);
+        NavigationManager.NavigateTo("/marcas/list");
+    }
+
+}

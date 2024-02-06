@@ -1,0 +1,31 @@
+﻿@page "/tipopagos/editar/{id:int}"
+@using RestauranteApp.Shared
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>Tipo de Pago</h3>
+<hr />
+
+<TipoPagoEditPage TipoPago="Registro" OnGrabar="Actualizar"></TipoPagoEditPage>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    public TipoPagoDto Registro { get; set; } = new();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var response = await Http.GetFromJsonAsync<TipoPagoDto>($"api/tipopagos/{id}");
+        if (response is not null)
+        {
+            Registro = response;
+        }
+    }
+    private async Task Actualizar()
+    {
+        await Http.PutAsJsonAsync($"api/tipopagos/{id}", Registro);
+        NavigationManager.NavigateTo("/tipopagos/list");
+    }
+
+}
