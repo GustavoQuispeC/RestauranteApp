@@ -8,11 +8,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestauranteApp.Client", "Cl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestauranteApp.Shared", "Shared\RestauranteApp.Shared.csproj", "{5FDF6CDB-1FE2-46FD-8E9E-2BD78C27A5F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestauranteApp.Entities", "RestauranteApp.Entities\RestauranteApp.Entities.csproj", "{8F0958BC-8A9E-4850-AEE3-8A317EE7F35A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestauranteApp.Entities", "RestauranteApp.Entities\RestauranteApp.Entities.csproj", "{8F0958BC-8A9E-4850-AEE3-8A317EE7F35A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestauranteApp.DataAcces", "RestauranteApp.DataAcces\RestauranteApp.DataAcces.csproj", "{B9098489-373A-400F-9AE0-57C281A6730A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestauranteApp.DataAcces", "RestauranteApp.DataAcces\RestauranteApp.DataAcces.csproj", "{B9098489-373A-400F-9AE0-57C281A6730A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestauranteApp.Repositories", "RestauranteApp.Repositories\RestauranteApp.Repositories.csproj", "{3B00E5E4-CD46-472F-9691-E0E30303D853}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestauranteApp.Repositories", "RestauranteApp.Repositories\RestauranteApp.Repositories.csproj", "{3B00E5E4-CD46-472F-9691-E0E30303D853}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

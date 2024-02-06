@@ -21,7 +21,7 @@ namespace RestauranteApp.DataAcces.Configurations
                 .HasMaxLength(100);
             builder.Property(p=>p.Telefono)
                 .HasMaxLength(20);
-            builder.Property(p=>p.email)
+            builder.Property(p=>p.Email)
                 .IsUnicode(false);
             builder.Property(p=>p.Observacion)
                 .HasMaxLength(150);

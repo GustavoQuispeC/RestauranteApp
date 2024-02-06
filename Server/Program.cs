@@ -1,14 +1,18 @@
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using RestauranteApp.DataAcces.Data;
+using RestauranteApp.Repositories.Implementaciones;
+using RestauranteApp.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
-//builder.Services.AddControllers();
+//builder.Services.AddControllersWithViews();
+//builder.Services.AddRazorPages();
+
+builder.Services.AddControllers();
+builder.Services.AddTransient<IProveedorRepository, ProveedorRepository>();
 
 
 
@@ -41,7 +45,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 
-app.MapRazorPages();
+//app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
 

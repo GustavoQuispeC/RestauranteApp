@@ -1,0 +1,74 @@
+﻿@page "/proveedores/list"
+@using RestauranteApp.Shared
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>Proveedor</h3>
+<hr />
+<NavLink href="proveedores/crear" >Nuevo</NavLink>
+@if(_proveedor == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr class="table">
+                <th>Id:</th>
+                <th>Razón Social:</th>
+                <th>Nombres:</th>
+                <th>Apellidos:</th>
+                <th>Teléfono:</th>
+                <th>Correo:</th>
+                <th>Observacion:</th>
+                <th>Fecha registro:</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in _proveedor)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.RazonSocial</td>
+                    <td>@item.Nombres</td>
+                    <td>@item.Apellidos</td>
+                    <td>@item.Telefono</td>
+                    <td>@item.Email</td>
+                    <td>@item.Observacion</td>
+                    <td>@item.FechaCreacion</td>
+                    <td>
+                        <Button Class="btn btn-success" @onclick="()=>Editar(item.Id)">Editar</Button>
+                        <Button Class="btn btn-danger" @onclick="()=>Eliminar(item.Id)">Eliminar</Button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+}
+
+
+
+@code {
+    private ProveedorDto[]? _proveedor;
+    protected override async Task OnInitializedAsync()
+    {
+        await Cargar();
+    }
+    private async Task  Cargar()
+    {
+        _proveedor = await Http.GetFromJsonAsync<ProveedorDto[]>("api/proveedores");
+        
+    }
+    private void Editar(int id)
+    {
+        NavigationManager.NavigateTo($"proveedores/editar/{id}");
+    }
+    private async void Eliminar(int id)
+    {
+        await Http.DeleteAsync($"api/proveedores/{id}");
+        await Cargar();
+    }
+}

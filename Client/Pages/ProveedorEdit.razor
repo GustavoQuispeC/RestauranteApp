@@ -1,0 +1,31 @@
+﻿@page "/proveedores/editar/{id:int}"
+@using RestauranteApp.Shared
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>ProveedorEdit</h3>
+<hr />
+
+<ProveedorEditPage Proveedor="Registro" OnGrabar="Actualizar"></ProveedorEditPage>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    public ProveedorDto Registro { get; set; } = new();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var response = await Http.GetFromJsonAsync<ProveedorDto>($"api/proveedores/{id}");
+        if (response is not null)
+        {
+            Registro = response;
+        }
+    }
+    private async Task Actualizar()
+    {
+        await Http.PutAsJsonAsync($"api/proveedores/{id}", Registro);
+        NavigationManager.NavigateTo("/proveedores/list");
+    }
+
+}
