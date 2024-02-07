@@ -1,0 +1,111 @@
+﻿@using RestauranteApp.Shared
+
+
+<h3>@Titulo</h3>
+<EditForm Model="Request" OnSubmit="Grabar">
+    <div class="row row-cols-1 row-cols-md-2">
+        <div class="col>">
+            <div class="mb-3 row">
+                <label class="form-label" form="Nombre">Nombre:</label>
+                <input type="text" id="Nombre" class="form-control" @bind-value="Request.Nombre" />
+            </div>
+            <div class="mb-3 row">
+                <label class="form-label" form="PrecioVenta">Precio Venta:</label>
+                <input type="Number" id="Nombres" class="form-control" @bind-value="Request.PrecioVenta" />
+            </div>
+            <div class="mb-3 row">
+                <label class="form-label" form="PrecioCompra">Precio Compra:</label>
+                <input type="Number" id="PrecioCompra" class="form-control" @bind-value="Request.PrecioCompra" />
+            </div>
+            <div class="mb-3 row">
+                <label class="form-label" form="Stock">Stock:</label>
+                <input type="number" id="Stock" class="form-control" @bind-value="Request.Stock" />
+            </div>
+            <div class="mb-3 row">
+                <label class="form-label" form="FechaVencimiento">F.Vencimiento:</label>
+                <input type="date" id="FechaVencimiento" class="form-control" @bind-value="Request.FechaVencimiento" />
+            </div>
+            <div class="mb-3 row">
+                <label class="form-label" form="Observacion">Observación:</label>
+                <input type="text" id="Observacion" class="form-control" @bind-value="Request.Observacion" />
+            </div>
+            <div class="mb-3 row">
+                <label class="form-label" form="Categoria">Categoria:</label>
+                <select id="Categoria" class="form-select" @bind="@Request.CategoriaId">
+                    <option value="">Seleccione una categoría </option>
+                    @foreach (var item in Categorias)
+                    {
+                        <option value="@item.Id">@item.Nombre</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3 row">
+                <label class="form-label" form="Marca">Marca:</label>
+                <select id="Marca" class="form-select" @bind="@Request.MarcaId">
+                    <option value="">Seleccione una marca </option>
+                    @foreach (var item in Marcas)
+                    {
+                        <option value="@item.Id">@item.Nombre</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3 row">
+                <label class="form-label" form="Proveedor">Proveedor:</label>
+                <select id="Proveedor" class="form-select" @bind="@Request.ProveedorId">
+                    <option value="">Seleccione un proveedor </option>
+                    @foreach (var item in Proveedores)
+                    {
+                        <option value="@item.Id">@item.RazonSocial</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3 row">
+                <label class="form-label" form="UnidadMedida">Unidad Medida:</label>
+                <select id="UnidadMedida" class="form-select" @bind="@Request.UnidadMedidaId">
+                    <option value="">Seleccione unidad de medida </option>
+                    @foreach (var item in UnidadMedidas)
+                    {
+                        <option value="@item.Id">@item.Nombre</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+    </div>
+    <div class="row row-cols-1">
+        <Button Type="ButtonType.Submit" Class="btn btn-success w-25">@TextoBoton <Icon Name="IconName.CheckCircle" /></Button>
+    </div>
+
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public ProductoDtoRequest Request { get; set; } = new();
+    [Parameter]
+    public EventCallback onGrabar { get; set; }
+    [Parameter]
+    public string Titulo { get; set; } = string.Empty;
+
+    [Parameter]
+    public ICollection<CategoriaDto> Categorias { get; set; } = new List<CategoriaDto>();
+
+    [Parameter]
+    public ICollection<MarcaDto> Marcas { get; set; } = new List<MarcaDto>();
+
+    [Parameter]
+    public ICollection<ProveedorDto> Proveedores { get; set; } = new List<ProveedorDto>();
+
+    [Parameter]
+    public ICollection<UnidadMedidaDto> UnidadMedidas { get; set; } = new List<UnidadMedidaDto>();
+
+    public string TextoBoton { get; set; } = "Crear";
+    private void Grabar()
+    {
+        onGrabar.InvokeAsync();
+    }
+    protected override void OnInitialized()
+    {
+        TextoBoton = Request.Id == 0 ? "Crear" : "Actualizar";
+    }
+}

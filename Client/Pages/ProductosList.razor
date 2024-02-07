@@ -1,0 +1,77 @@
+﻿@page "/productos/list"
+@using RestauranteApp.Shared.Response
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+
+<h3>Productos</h3>
+<hr />
+<a href="productos/crear" class="btn btn-success">Nuevo <Icon Name="IconName.Clipboard2Fill" /></a>
+<br />
+<br />
+
+
+@if (Productos == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table table-hover table-bordered table-striped">
+        <thead class="color-font">
+            <tr>
+                <th>Id:</th>
+                <th>Nombre:</th>
+                <th>Stock</th>
+                <th>Unidad Medida</th>
+                <th>Precio Compra</th>
+                <th>Precio Venta:</th>
+                <th>Marca</th>
+                <th>Categoria</th>
+                <th>Proveedor</th>
+                <th>F. Vencimiento</th>
+                <th>Observación</th>
+                
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Productos)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Nombre</td>
+                    <td>@item.Stock</td>
+                    <td>@item.UnidadMedida</td>
+                    <td>@item.PrecioCompra</td>
+                    <td>@item.PrecioVenta</td>
+                    <td>@item.Marca</td>
+                    <td>@item.Categoria</td>
+                    <td>@item.Proveedor</td>
+                    <td>@item.FechaVencimiento</td>
+                    <td>@item.Observacion</td>
+                   
+                    
+                    @* <td>
+                        <Button Class="colorEditar" @onclick="()=>Editar(item.Id)"><Icon Name="IconName.PenFill" /></Button>
+                        <Button Class="colorEliminar" @onclick="()=>Eliminar(item.Id)"><Icon Name="IconName.TrashFill" /></Button>
+                    </td> *@
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+
+@code {
+    public ICollection<ProductoDtoResponse>?Productos{ get; set; }
+    private async Task Cargar()
+    {
+        Productos = await Http.GetFromJsonAsync<ICollection<ProductoDtoResponse>>("api/productos");
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        await Cargar();
+    }
+}

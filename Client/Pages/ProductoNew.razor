@@ -1,0 +1,48 @@
+﻿@page "/productos/crear"
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>Producto</h3>
+@if(Categorias !=null && Marcas != null)
+{
+    <ProductoEditPage 
+        onGrabar="Crear" 
+        Titulo="Crear nuevo Producto" 
+        Request="ProductoNuevo" 
+        Categorias="Categorias" 
+        Marcas="Marcas" 
+        Proveedores="Proveedores" 
+        UnidadMedidas="UnidadMedidas">
+    </ProductoEditPage>
+}
+else
+{
+    <p>Cargando...</p>
+}
+
+
+@code {
+    public ProductoDtoRequest ProductoNuevo { get; set; } = new();
+
+    public ICollection<CategoriaDto>? Categorias { get; set; } = new List<CategoriaDto>();
+    public ICollection<MarcaDto>? Marcas { get; set; } = new List<MarcaDto>();
+    public ICollection<ProveedorDto>? Proveedores { get; set; } = new List<ProveedorDto>();
+    public ICollection<UnidadMedidaDto>? UnidadMedidas { get; set; } = new List<UnidadMedidaDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Categorias = await Http.GetFromJsonAsync<ICollection<CategoriaDto>>("api/categorias");
+        Marcas = await Http.GetFromJsonAsync<ICollection<MarcaDto>>("api/marcas");
+        Proveedores = await Http.GetFromJsonAsync<ICollection<ProveedorDto>>("api/proveedores");
+        UnidadMedidas = await Http.GetFromJsonAsync<ICollection<UnidadMedidaDto>>("api/unidadmedidas");
+
+    }
+
+
+
+    private async Task Crear()
+    {
+        await Http.PostAsJsonAsync("api/productos", ProductoNuevo);
+        NavigationManager.NavigateTo("productos/list");
+    }
+}

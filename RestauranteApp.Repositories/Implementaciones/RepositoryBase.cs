@@ -13,7 +13,7 @@ namespace RestauranteApp.Repositories.Implementaciones
 {
     public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : EntityBase
     {
-        private readonly RestauranteAppDbContext Context;
+        public readonly RestauranteAppDbContext Context;
 
         public RepositoryBase(RestauranteAppDbContext context)
         {

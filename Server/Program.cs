@@ -16,6 +16,8 @@ builder.Services.AddTransient<IProveedorRepository, ProveedorRepository>();
 builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddTransient<IMarcaRepository, MarcaRepository>();
 builder.Services.AddTransient<ITipoPagoRepository, TipoPagoRepository>();
+builder.Services.AddTransient<IProductoRepository, ProductoRepository>();
+builder.Services.AddTransient<IUnidadMedidaRepository, UnidadMedidaRepository>();
 
 
 
