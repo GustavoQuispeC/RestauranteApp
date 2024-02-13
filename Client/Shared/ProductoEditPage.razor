@@ -2,24 +2,34 @@
 
 
 <h3>@Titulo</h3>
-<EditForm Model="Request" OnSubmit="Grabar">
+<EditForm Model="Request" OnValidSubmit="Grabar">
+    <DataAnnotationsValidator/>
     <div class="row row-cols-1 row-cols-md-2">
         <div class="col>">
             <div class="mb-3 row">
                 <label class="form-label" form="Nombre">Nombre:</label>
-                <input type="text" id="Nombre" class="form-control" @bind-value="Request.Nombre" />
+                <input type="text" id="Nombre" class="form-control" @bind-value="Request.Nombre"/>
+                <ValidationMessage For="() => Request.Nombre" />
             </div>
             <div class="mb-3 row">
                 <label class="form-label" form="PrecioVenta">Precio Venta:</label>
                 <input type="Number" id="Nombres" class="form-control" @bind-value="Request.PrecioVenta" />
+                <ValidationMessage For="() => Request.PrecioVenta" />
             </div>
             <div class="mb-3 row">
                 <label class="form-label" form="PrecioCompra">Precio Compra:</label>
-                <input type="Number" id="PrecioCompra" class="form-control" @bind-value="Request.PrecioCompra" />
+               
+                <CurrencyInput TValue="float" @bind-Value="@Request.PrecioCompra" />
+                @* <NumberInput TValue="float" id="PrecioCompra" @bind-value="Request.PrecioCompra"/> *@
+                @* <InputNumber TValue="float" id="PrecioCompra" class="form-control" @bind-value="@Request.PrecioCompra" ></InputNumber> *@
+               
+
+                
             </div>
             <div class="mb-3 row">
                 <label class="form-label" form="Stock">Stock:</label>
                 <input type="number" id="Stock" class="form-control" @bind-value="Request.Stock" />
+               
             </div>
             <div class="mb-3 row">
                 <label class="form-label" form="FechaVencimiento">F.Vencimiento:</label>
@@ -72,9 +82,17 @@
         </div>
 
     </div>
-    <div class="row row-cols-1">
-        <Button Type="ButtonType.Submit" Class="btn btn-success w-25">@TextoBoton <Icon Name="IconName.CheckCircle" /></Button>
+    <div class="row row-cols-3">
+        <div class=" col">
+            <Button Type="ButtonType.Submit" Class="btn btn-success w-25">@TextoBoton <Icon Name="IconName.CheckCircle" /></Button>
+        </div>
+        <div class=" col">
+            <Button Type="ButtonType.Reset" Class="btn btn-warning w-25"><Icon Name="IconName.Clipboard" />Limpiar</Button>
+        </div>
+       
+       
     </div>
+    <ValidationSummary></ValidationSummary>
 
 </EditForm>
 

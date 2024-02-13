@@ -6,6 +6,10 @@
     color: red;
 }
 
+.colorReset{
+    color: darkgoldenrod;
+}
+
 .color-font {
     color: white;
     background-color: olivedrab;

@@ -31,6 +31,7 @@ else
                 <th>Proveedor</th>
                 <th>F. Vencimiento</th>
                 <th>Observación</th>
+                <th>Acciones</th>
                 
                 
             </tr>
@@ -52,10 +53,10 @@ else
                     <td>@item.Observacion</td>
                    
                     
-                    @* <td>
+                    <td>
                         <Button Class="colorEditar" @onclick="()=>Editar(item.Id)"><Icon Name="IconName.PenFill" /></Button>
                         <Button Class="colorEliminar" @onclick="()=>Eliminar(item.Id)"><Icon Name="IconName.TrashFill" /></Button>
-                    </td> *@
+                    </td>
                 </tr>
             }
         </tbody>
@@ -72,6 +73,15 @@ else
     }
     protected override async Task OnInitializedAsync()
     {
+        await Cargar();
+    }
+    private void Editar(int id)
+    {
+        NavigationManager.NavigateTo($"productos/edit/{id}");
+    }
+    private async Task Eliminar(int id)
+    {
+        await Http.DeleteAsync($"api/productos/{id}");
         await Cargar();
     }
 }
