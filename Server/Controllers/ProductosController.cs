@@ -16,10 +16,17 @@ namespace RestauranteApp.Server.Controllers
         {
             _repository = repository;
         }
+
+        //Get: api/productos
+        //Get: api/productos?filtro=string
         [HttpGet]
-        public async Task<IActionResult> Get()
+        //public async Task<IActionResult> Get()
+        //{
+        //    return Ok(await _repository.ListarAsync());
+        //}
+        public async Task<IActionResult> Get(string? filtro)
         {
-            return Ok(await _repository.ListarAsync());
+            return Ok(await _repository.ListarAsync(filtro));
         }
 
         [HttpPost]

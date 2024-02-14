@@ -18,10 +18,17 @@ namespace RestauranteApp.Repositories.Implementaciones
         {
         }
 
-        public async Task<ICollection<ProductoInfo>> ListarAsync()
+        public async Task<ICollection<ProductoInfo>> ListarAsync(string? filtro)
         {
-            return await Context.Set<Producto>()
+            var productos = Context.Set<Producto>()
                 .Where(p => p.Estado)
+                .AsQueryable();
+            if (filtro != null)
+            {
+                productos = productos.Where(p => p.Nombre.Contains(filtro));
+            }
+
+            return await productos
                 .Select(x => new ProductoInfo
                 {
                     Id = x.Id,

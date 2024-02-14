@@ -9,7 +9,22 @@
 <a href="productos/crear" class="btn btn-success">Nuevo <Icon Name="IconName.Clipboard2Fill" /></a>
 <br />
 <br />
+<div Class="row mb-5 mt-4 justify-content-start align-items-baseLine">
+    <div class="col-1">
+        <label class="form-label" for="filtro">Nombre:</label>
+    </div>
+    <div class="col-8">
+        <div class="input-group">
+            <input type="text" class=" form-control" @bind-value="Filtro" id="filtro"/>
+            <span class="input-group-text" style="cursor:pointer" @onclick="() => Filtro = string.Empty"> <Icon Name="IconName.XOctagonFill" Class="colorEliminar" /></span>
+        </div>
+    </div>
+    <div class="col-sm">
+        <Button Type="ButtonType.Button" style="cursor:pointer" Class="btn btn-outline-primary" @onclick="Cargar"> <Icon Name="IconName.BinocularsFill" /></Button>
+    </div>
 
+</div>
+<hr />
 
 @if (Productos == null)
 {
@@ -67,9 +82,12 @@ else
 
 @code {
     public ICollection<ProductoDtoResponse>?Productos{ get; set; }
+
+    private string Filtro { get; set; } = default!;
+
     private async Task Cargar()
     {
-        Productos = await Http.GetFromJsonAsync<ICollection<ProductoDtoResponse>>("api/productos");
+        Productos = await Http.GetFromJsonAsync<ICollection<ProductoDtoResponse>>($"api/productos?filtro={Filtro}");
     }
     protected override async Task OnInitializedAsync()
     {
