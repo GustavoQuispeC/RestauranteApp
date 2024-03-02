@@ -22,6 +22,216 @@ namespace RestauranteApp.DataAcces.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("RestauranteApp.DataAccess.IdentityUserRestauranteApp", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Direccion")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("FechaNacimiento")
+                        .HasColumnType("DATE");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NombreCompleto")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
             modelBuilder.Entity("RestauranteApp.Entities.Caja", b =>
                 {
                     b.Property<int>("Id")
@@ -89,7 +299,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 1,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 2, 5, 17, 18, 31, 47, DateTimeKind.Local).AddTicks(6010),
+                            FechaCreacion = new DateTime(2024, 2, 22, 12, 57, 57, 327, DateTimeKind.Local).AddTicks(5976),
                             Nombre = "Parrilla",
                             Observacion = ""
                         },
@@ -97,7 +307,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 2,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 2, 5, 17, 18, 31, 47, DateTimeKind.Local).AddTicks(6031),
+                            FechaCreacion = new DateTime(2024, 2, 22, 12, 57, 57, 327, DateTimeKind.Local).AddTicks(5997),
                             Nombre = "Hamburguesa",
                             Observacion = ""
                         },
@@ -105,7 +315,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 3,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 2, 5, 17, 18, 31, 47, DateTimeKind.Local).AddTicks(6035),
+                            FechaCreacion = new DateTime(2024, 2, 22, 12, 57, 57, 327, DateTimeKind.Local).AddTicks(6000),
                             Nombre = "Gaseosa",
                             Observacion = ""
                         },
@@ -113,7 +323,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 4,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 2, 5, 17, 18, 31, 47, DateTimeKind.Local).AddTicks(6037),
+                            FechaCreacion = new DateTime(2024, 2, 22, 12, 57, 57, 327, DateTimeKind.Local).AddTicks(6002),
                             Nombre = "Cerveza",
                             Observacion = ""
                         },
@@ -121,7 +331,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 5,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 2, 5, 17, 18, 31, 47, DateTimeKind.Local).AddTicks(6039),
+                            FechaCreacion = new DateTime(2024, 2, 22, 12, 57, 57, 327, DateTimeKind.Local).AddTicks(6005),
                             Nombre = "Wisky",
                             Observacion = ""
                         },
@@ -129,7 +339,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 6,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 2, 5, 17, 18, 31, 47, DateTimeKind.Local).AddTicks(6044),
+                            FechaCreacion = new DateTime(2024, 2, 22, 12, 57, 57, 327, DateTimeKind.Local).AddTicks(6009),
                             Nombre = "Pisco",
                             Observacion = ""
                         });
@@ -209,7 +419,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 1,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 2, 5, 17, 18, 31, 68, DateTimeKind.Local).AddTicks(5584),
+                            FechaCreacion = new DateTime(2024, 2, 22, 12, 57, 57, 361, DateTimeKind.Local).AddTicks(6936),
                             Nombre = "Inka Kola",
                             Observacion = ""
                         },
@@ -217,7 +427,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 2,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 2, 5, 17, 18, 31, 68, DateTimeKind.Local).AddTicks(5613),
+                            FechaCreacion = new DateTime(2024, 2, 22, 12, 57, 57, 361, DateTimeKind.Local).AddTicks(6958),
                             Nombre = "Coca Cola",
                             Observacion = ""
                         },
@@ -225,7 +435,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 3,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 2, 5, 17, 18, 31, 68, DateTimeKind.Local).AddTicks(5615),
+                            FechaCreacion = new DateTime(2024, 2, 22, 12, 57, 57, 361, DateTimeKind.Local).AddTicks(6962),
                             Nombre = "Queirolo",
                             Observacion = ""
                         },
@@ -233,7 +443,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 4,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 2, 5, 17, 18, 31, 68, DateTimeKind.Local).AddTicks(5618),
+                            FechaCreacion = new DateTime(2024, 2, 22, 12, 57, 57, 361, DateTimeKind.Local).AddTicks(6964),
                             Nombre = "Tabernero",
                             Observacion = ""
                         },
@@ -241,7 +451,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 5,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 2, 5, 17, 18, 31, 68, DateTimeKind.Local).AddTicks(5620),
+                            FechaCreacion = new DateTime(2024, 2, 22, 12, 57, 57, 361, DateTimeKind.Local).AddTicks(6967),
                             Nombre = "Pilsen",
                             Observacion = ""
                         });
@@ -371,6 +581,10 @@ namespace RestauranteApp.DataAcces.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("Email")
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
+
                     b.Property<bool>("Estado")
                         .HasColumnType("bit");
 
@@ -394,10 +608,6 @@ namespace RestauranteApp.DataAcces.Migrations
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("email")
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(max)");
 
                     b.HasKey("Id");
 
@@ -436,7 +646,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 1,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 2, 5, 17, 18, 31, 72, DateTimeKind.Local).AddTicks(8977),
+                            FechaCreacion = new DateTime(2024, 2, 22, 12, 57, 57, 362, DateTimeKind.Local).AddTicks(8744),
                             Nombre = "Efectivo",
                             Observacion = ""
                         },
@@ -444,7 +654,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 2,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 2, 5, 17, 18, 31, 72, DateTimeKind.Local).AddTicks(9004),
+                            FechaCreacion = new DateTime(2024, 2, 22, 12, 57, 57, 362, DateTimeKind.Local).AddTicks(8764),
                             Nombre = "Transferencia",
                             Observacion = ""
                         },
@@ -452,7 +662,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 3,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 2, 5, 17, 18, 31, 72, DateTimeKind.Local).AddTicks(9007),
+                            FechaCreacion = new DateTime(2024, 2, 22, 12, 57, 57, 362, DateTimeKind.Local).AddTicks(8768),
                             Nombre = "Yape",
                             Observacion = ""
                         },
@@ -460,7 +670,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 4,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 2, 5, 17, 18, 31, 72, DateTimeKind.Local).AddTicks(9009),
+                            FechaCreacion = new DateTime(2024, 2, 22, 12, 57, 57, 362, DateTimeKind.Local).AddTicks(8770),
                             Nombre = "Plin",
                             Observacion = ""
                         });
@@ -494,30 +704,81 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 1,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 2, 5, 17, 18, 31, 73, DateTimeKind.Local).AddTicks(1689),
+                            FechaCreacion = new DateTime(2024, 2, 22, 12, 57, 57, 363, DateTimeKind.Local).AddTicks(565),
                             Nombre = "Unidad"
                         },
                         new
                         {
                             Id = 2,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 2, 5, 17, 18, 31, 73, DateTimeKind.Local).AddTicks(1703),
+                            FechaCreacion = new DateTime(2024, 2, 22, 12, 57, 57, 363, DateTimeKind.Local).AddTicks(573),
                             Nombre = "Litro"
                         },
                         new
                         {
                             Id = 3,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 2, 5, 17, 18, 31, 73, DateTimeKind.Local).AddTicks(1706),
+                            FechaCreacion = new DateTime(2024, 2, 22, 12, 57, 57, 363, DateTimeKind.Local).AddTicks(575),
                             Nombre = "Caja"
                         },
                         new
                         {
                             Id = 4,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 2, 5, 17, 18, 31, 73, DateTimeKind.Local).AddTicks(1708),
+                            FechaCreacion = new DateTime(2024, 2, 22, 12, 57, 57, 363, DateTimeKind.Local).AddTicks(577),
                             Nombre = "Paquete"
                         });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("RestauranteApp.DataAccess.IdentityUserRestauranteApp", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("RestauranteApp.DataAccess.IdentityUserRestauranteApp", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RestauranteApp.DataAccess.IdentityUserRestauranteApp", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("RestauranteApp.DataAccess.IdentityUserRestauranteApp", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("RestauranteApp.Entities.DetalleMovimiento", b =>

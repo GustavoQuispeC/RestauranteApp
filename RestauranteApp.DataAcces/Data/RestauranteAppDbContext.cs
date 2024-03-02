@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using RestauranteApp.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RestauranteApp.DataAcces.Data
 {
-    public class RestauranteAppDbContext: DbContext
+    public class RestauranteAppDbContext: IdentityDbContext<IdentityUserRestauranteApp>
     {
         public RestauranteAppDbContext(DbContextOptions<RestauranteAppDbContext>options) 
             : base(options)

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RestauranteApp.Entities;
 using RestauranteApp.Repositories.Interfaces;
 using RestauranteApp.Shared;
@@ -7,6 +8,7 @@ namespace RestauranteApp.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    
     public class CategoriasController : ControllerBase
     {
         private readonly ICategoriaRepository _repository;

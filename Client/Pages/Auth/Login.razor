@@ -1,0 +1,80 @@
+﻿@page "/login"
+@using RestauranteApp.Client.Auth
+
+@inject HttpClient HttpClient
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject IToastService ToastService
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-5">
+            <div class="card shadow-lg mt-5">
+                <div class="card-header">
+                    <h3>Inicio de Sesion</h3>
+                </div>
+                <div class="card-body">
+                    <EditForm Model="@LoginDtoRequest" OnValidSubmit="ValidLogin">
+                        <DataAnnotationsValidator />
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="usuario" @bind-value="LoginDtoRequest.Usuario"
+                                   placeholder="usuario" autocomplete="true" />
+                            <label for="usuario">Usuario</label>
+                            <ValidationMessage For="() => LoginDtoRequest.Usuario" />
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="password" @bind-value="LoginDtoRequest.Password"
+                                   placeholder="clave" autocomplete="true" />
+                            <label for="usuario">Clave</label>
+                            <ValidationMessage For="() => LoginDtoRequest.Password" />
+                        </div>
+                        <div class="d-grid gap-1 mt-4 mb-0">
+                            <button class="btn btn-primary" type="submit">Ingresar</button>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<LoadingComponent IsLoading="IsLoading" />
+
+@code {
+
+    public LoginDtoRequest LoginDtoRequest { get; set; } = new();
+
+    public bool IsLoading { get; set; }
+
+    private async Task ValidLogin()
+    {
+        try
+        {
+            IsLoading = true; //Mostrara el spinner de carga
+            var response = await HttpClient.PostAsJsonAsync("api/Usuarios/Login", LoginDtoRequest);
+
+            response.EnsureSuccessStatusCode();
+
+            var auth = (AuthenticacionService)AuthenticationStateProvider;
+            var loginResponse = await response.Content.ReadFromJsonAsync<LoginDtoResponse>();
+
+            if (loginResponse!.Exito == false)
+            {
+                ToastService.ShowWarning(loginResponse.MensajeError!);
+            }
+            else
+            {
+                await auth.Autenticar(loginResponse);
+                NavigationManager.NavigateTo("/");
+            }
+        }
+        catch (Exception ex)
+        {
+            ToastService.ShowError(ex.Message);
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+}

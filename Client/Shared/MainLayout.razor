@@ -1,55 +1,15 @@
 ﻿@inherits LayoutComponentBase
+<BlazoredToasts />
 
-<div class="bb-page">
-
-    <Sidebar @ref="sidebar"
-             IconName="IconName.BootstrapFill"
-             Title="Blazor Bootstrap"
-             DataProvider="SidebarDataProvider" />
-
-    <main>
-        <div class="bb-top-row px-4 d-flex justify-content-end">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
-            <div class="py-2">
-                @Body
-            </div>
-        </article>
-    </main>
-
+<div>
+    <NavMenu />
 </div>
-
-<Modal IsServiceModal="false" />
-<Preload />
-<Toasts class="p-3" AutoHide="true" Delay="4000" Placement="ToastsPlacement.TopRight" />
-
-@code {
-    private Sidebar sidebar = default!;
-    private IEnumerable<NavItem> navItems = default!;
-
-    private async Task<SidebarDataProviderResult> SidebarDataProvider(SidebarDataProviderRequest request)
-    {
-        if (navItems is null)
-            navItems = GetNavItems();
-
-        return await Task.FromResult(request.ApplyTo(navItems));
-    }
-
-    private IEnumerable<NavItem> GetNavItems()
-    {
-        navItems = new List<NavItem>
-        {
-            new NavItem { Id = "1", Href = "/", IconName = IconName.HouseDoorFill, Text = "Home", Match=NavLinkMatch.All},
-            new NavItem { Id = "2", Href = "/proveedores/list", IconName = IconName.Person, Text = "Proveedor"},
-            new NavItem { Id = "3", Href = "/categorias/list", IconName = IconName.Person, Text = "Categoria"},
-            new NavItem { Id = "4", Href = "/marcas/list", IconName = IconName.Person, Text = "Marca"},
-            new NavItem { Id = "5", Href = "/tipopagos/list", IconName = IconName.Person, Text = "Tipo de Pago"},
-            new NavItem { Id = "6", Href = "/productos/list", IconName = IconName.Person, Text = "Producto"}
-            
-        };
-
-        return navItems;
-    }
-}
+<div class="container-fluid content position-relative h-100">
+    @Body
+</div>
+<footer class="border-top footer">
+    <div class="container d-none d-lg-block">
+        <label>© 2024 - Moustaches - FastFood <i class="bi bi-heart-fill"></i></label>
+        <NavLink class="text-dark" href="https://moustaches.com.pe" target="_blank">Saber más</NavLink>
+    </div>
+</footer>
