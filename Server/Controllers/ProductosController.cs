@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestauranteApp.Entities;
 using RestauranteApp.Repositories.Interfaces;
-using RestauranteApp.Shared;
+using RestauranteApp.Server.Services;
 using RestauranteApp.Shared.Request;
 
 namespace RestauranteApp.Server.Controllers
@@ -11,42 +11,26 @@ namespace RestauranteApp.Server.Controllers
     public class ProductosController : ControllerBase
     {
         private readonly IProductoRepository _repository;
+        public IFileUpload _fileUpload;
 
-        public ProductosController(IProductoRepository repository)
+        public ProductosController(IProductoRepository repository, IFileUpload fileUpload)
         {
             _repository = repository;
+            _fileUpload = fileUpload;
         }
 
         //Get: api/productos
         //Get: api/productos?filtro=string
-        [HttpGet]
+        //[HttpGet]
         //public async Task<IActionResult> Get()
         //{
         //    return Ok(await _repository.ListarAsync());
         //}
+
+        [HttpGet]
         public async Task<IActionResult> Get(string? filtro)
         {
             return Ok(await _repository.ListarAsync(filtro));
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Post(ProductoDtoRequest request)
-        {
-            var producto = new Producto
-            {
-                Nombre = request.Nombre,
-                PrecioVenta = request.PrecioVenta,
-                PrecioCompra = request.PrecioCompra,
-                Stock = request.Stock,
-                FechaVencimiento = request.FechaVencimiento,
-                Observacion = request.Observacion,
-                CategoriaId = request.CategoriaId,
-                MarcaId = request.MarcaId,
-                ProveedorId = request.ProveedorId,
-                UnidadMedidaId = request.UnidadMedidaId
-            };
-            await _repository.AddAsync(producto);
-            return Ok();
         }
 
         [HttpGet("{id:int}")]
@@ -69,10 +53,40 @@ namespace RestauranteApp.Server.Controllers
                 CategoriaId = producto.CategoriaId,
                 MarcaId = producto.MarcaId,
                 ProveedorId = producto.ProveedorId,
-                UnidadMedidaId = producto.UnidadMedidaId
+                UnidadMedidaId = producto.UnidadMedidaId,
+                UrlImagen = producto.UrlImagen
             };
             return Ok(response);
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Post(ProductoDtoRequest request)
+        {
+            var producto = new Producto
+            {
+                Nombre = request.Nombre,
+                PrecioVenta = request.PrecioVenta,
+                PrecioCompra = request.PrecioCompra,
+                Stock = request.Stock,
+                FechaVencimiento = request.FechaVencimiento,
+                Observacion = request.Observacion,
+                CategoriaId = request.CategoriaId,
+                MarcaId = request.MarcaId,
+                ProveedorId = request.ProveedorId,
+                UnidadMedidaId = request.UnidadMedidaId
+            };
+            
+
+            if (request.FileName != null)
+                producto.UrlImagen = await _fileUpload.UploadFileAsync(request.Base64Imagen, request.FileName);
+          
+            await _repository.AddAsync(producto);
+
+            return Ok();
+        }
+
+        
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Put(int id, ProductoDtoRequest request)
         {
@@ -91,6 +105,11 @@ namespace RestauranteApp.Server.Controllers
             producto.MarcaId = request.MarcaId;
             producto.ProveedorId = request.ProveedorId;
             producto.UnidadMedidaId = request.UnidadMedidaId;
+
+            if (!string.IsNullOrWhiteSpace(request.Base64Imagen))
+            {
+                producto.UrlImagen = await _fileUpload.UploadFileAsync(request.Base64Imagen, request.FileName);
+            }
 
             await _repository.UpdateAsync();
             return Ok();

@@ -1,15 +1,14 @@
 ﻿
-@using RestauranteApp.Client.Auth
-@* @using res.Client.Auth *@
+@using RestauranteApp.Client.Autorizacion
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject SweetAlertService Swal
-@* @inject ICarritoProxy CarritoProxy;
-@implements IDisposable *@
+@* @inject ICarritoProxy CarritoProxy; *@
+@* @implements IDisposable *@
  
 <header>
-    //Menu
-    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+    
+    <nav class="navbar navbar-expand-lg colorMenu" data-bs-theme="dark">
         <div class="container-fluid">
             <NavLink class="navbar-brand" href="/">
                 <img src="assets/images/Fast-Food-icon_30334.png" alt="Moustaches"/>
@@ -25,6 +24,9 @@
                         <NavLink class="nav-link text-white" href="/">Inicio</NavLink>
                     </li>
                     <li class="nav-item">
+                        <NavLink class="nav-link text-white" href="productos/list">Productos</NavLink>
+                    </li>
+                    <li class="nav-item">
                         <NavLink class="nav-link text-white" href="categorias/list">Categorias</NavLink>
                     </li>
                     <li class="nav-item">
@@ -33,7 +35,14 @@
                     <li class="nav-item">
                         <NavLink class="nav-link text-white" href="productos/list">Productos</NavLink>
                     </li>
-                    //Rol de administrador
+                    <li class="nav-item">
+                        <NavLink class="nav-link text-white" href="proveedores/list">Proveedor</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link text-white" href="tipoPagos/list">Tipo de pago</NavLink>
+                    </li>
+
+                   @*  Rol de administrador *@
                     <AuthorizeView Roles="@Constantes.RolAdministrador">
                         <Authorized>
                             <li class="nav-item">
@@ -41,24 +50,26 @@
                             </li>
                         </Authorized>
                     </AuthorizeView>
+
                 </ul>
             </div>
-            <a class="btn btn-outline-info ms-auto me-3" href="carrito">
-                <i class="bi bi-cart me-1"></i>
-                Carrito
-                <span class="badge bg-info text-white rounded-pill">@* @MostrarCantidadCarrito() *@</span>
+            <a class="ms-auto me-3 colorCarrito" href="carrito">
+                <img src="assets/images/shoppingCar.png" alt="Icono del carrito" class="me-1" style="height: 40px;"> 
             </a>
+           
             <div>
                 <AuthorizeView>
                     <Authorized>
                         <NavLink class="navbar-text text-white">
                             <i class="bi bi-person-fill me-1"></i>@context.User.Identity!.Name
                         </NavLink>
-                        <button class="btn btn-outline-info" @onclick="CerrarSesion"><i class="bi bi-door-open me-1"></i>Salir</button>
+                        <button class="btn btn-outline-warning" @onclick="CerrarSesion"><i class="bi bi-door-open me-1"></i>Salir</button>
                     </Authorized>
                     <NotAuthorized>
-                        <NavLink class="btn btn-outline-info" href="login"><i class="bi bi-arrow-right-circle me-1"></i>Ingresar</NavLink>
-                        <NavLink class="btn btn-outline-info" href="register"><i class="bi bi-person-fill-add me-1"></i>Registrarse</NavLink>
+                        <NavLink class="btn btn-outline-warning" href="login"><i class="bi bi-arrow-right-circle me-1"></i>Ingresar</NavLink>
+                        
+
+                        <NavLink class="btn btn-outline-warning" href="register"><i class="bi bi-person-fill-add me-1"></i>Registrarse</NavLink>
                     </NotAuthorized>
                 </AuthorizeView>
             </div>
@@ -100,18 +111,5 @@
     }
 
 
-    // private int MostrarCantidadCarrito()
-    // {
-    //     return CarritoProxy.CantidadProductos();
-    // }
-
-    // protected override void OnInitialized()
-    // {
-    //     CarritoProxy.ActualizarVista += StateHasChanged;
-    // }
-
-    // public void Dispose()
-    // {
-    //     CarritoProxy.ActualizarVista += StateHasChanged;
-    // }
+    
 }

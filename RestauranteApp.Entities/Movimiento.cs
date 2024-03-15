@@ -8,7 +8,13 @@ namespace RestauranteApp.Entities
 {
     public class Movimiento : EntityBase
     {
-        public float Monto { get; set; }
+
+        public int ClienteId { get; set; }
+        public Cliente Cliente { get; set; } = default!;
+
+        
+        public float Total { get; set; }
+
         public float Descuento { get; set; }
         public float MontoFinal { get; set; }
         public float PagoRecibido { get; set; }
@@ -20,5 +26,7 @@ namespace RestauranteApp.Entities
 
         public TipoPago TipoPago { get; set; } = default!;
         public int TipoPagoId { get; set; }
+
+        public ICollection<DetalleMovimiento> DetallesMovimiento { get; set; } = new List<DetalleMovimiento>();
     }
 }

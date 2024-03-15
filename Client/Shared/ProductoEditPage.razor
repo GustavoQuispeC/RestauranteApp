@@ -1,4 +1,5 @@
-﻿@using RestauranteApp.Shared
+﻿
+@inject IToastService ToastService
 
 
 <h3>@Titulo</h3>
@@ -13,23 +14,19 @@
             </div>
             <div class="mb-3 row">
                 <label class="form-label" form="PrecioVenta">Precio Venta:</label>
-                <input type="Number" id="Nombres" class="form-control" @bind-value="Request.PrecioVenta" />
+                <InputNumber id="PrecioVenta" class="form-control" @bind-Value="Request.PrecioVenta" />
                 <ValidationMessage For="() => Request.PrecioVenta" />
             </div>
             <div class="mb-3 row">
                 <label class="form-label" form="PrecioCompra">Precio Compra:</label>
-               
-                <CurrencyInput TValue="float" @bind-Value="@Request.PrecioCompra" />
-                @* <NumberInput TValue="float" id="PrecioCompra" @bind-value="Request.PrecioCompra"/> *@
-                @* <InputNumber TValue="float" id="PrecioCompra" class="form-control" @bind-value="@Request.PrecioCompra" ></InputNumber> *@
-               
-
+                <InputNumber id="PrecioCompra" class="form-control" @bind-Value="Request.PrecioCompra" />
+                <ValidationMessage For="() => Request.PrecioCompra" />
                 
             </div>
             <div class="mb-3 row">
                 <label class="form-label" form="Stock">Stock:</label>
                 <input type="number" id="Stock" class="form-control" @bind-value="Request.Stock" />
-               
+               <ValidationMessage For="() => Request.Stock" />
             </div>
             <div class="mb-3 row">
                 <label class="form-label" form="FechaVencimiento">F.Vencimiento:</label>
@@ -79,20 +76,47 @@
                     }
                 </select>
             </div>
+
+            <div class="col mt-5 mb-5">
+            <div class="card">
+                <div class="card-body text-center">
+                    @if (Request.Base64Imagen is not null)
+                    {
+                        <div style="margin: 10px">
+                            <img src="data:image/jpeg;base64, @Request.Base64Imagen" alt="@Request.Nombre" style="width:200px" />
+                        </div>
+                    }
+                    else
+                    {
+                        <img src="@Request.UrlImagen" alt="@Request.Nombre" style="width: 200px" />
+                    }
+                </div>
+                <div class="card-footer bg-success-subtle">
+                    <InputFile accept="image/png, image/jpeg, image/webp" style="display: none" 
+                    OnChange="OnFileUploaded" id="file" />
+                    <label for="file" class="btn btn-secondary"><i class="bi bi-upload me-1"></i>Subir imagen</label>
+                </div>
+            </div>
+
+
+
+            </div>
+
+
         </div>
 
     </div>
     <div class="row row-cols-5">
         <div class=" col">
-            <Button Type="ButtonType.Submit" Class="btn btn-success">@TextoBoton <Icon Name="IconName.CheckCircle" /></Button>
+            <button type="submit" Class="btn btn-success">@TextoBoton <i class="bi bi-floppy"></i></button>
         </div>
         <div class=" col">
-            <Button Type="ButtonType.Reset" Class="btn btn-warning"><Icon Name="IconName.Clipboard" />Limpiar</Button>
+            <button type="reset" Class="btn btn-warning"><i class="bi bi-stars"></i>Limpiar</button>
         </div>
        
        
     </div>
-    <ValidationSummary></ValidationSummary>
+    @* <ValidationSummary></ValidationSummary> *@
 
 </EditForm>
 
@@ -125,5 +149,23 @@
     protected override void OnInitialized()
     {
         TextoBoton = Request.Id == 0 ? "Crear" : "Actualizar";
+    }
+
+    private async Task OnFileUploaded(InputFileChangeEventArgs e)
+    {
+        try
+        {
+            var imagen = e.File;
+            var buffer = new byte[imagen.Size];
+            var _ = await imagen.OpenReadStream().ReadAsync(buffer); // Extrae el base64
+
+            Request.Base64Imagen = Convert.ToBase64String(buffer);
+            Request.FileName = imagen.Name;
+            Request.UrlImagen = null;
+        }
+        catch (Exception ex)
+        {
+            ToastService.ShowError(ex.Message);
+        }
     }
 }

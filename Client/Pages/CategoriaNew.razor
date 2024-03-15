@@ -3,9 +3,13 @@
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 
-<h3>Categoria</h3>
-<hr />
-<CategoriaEditPage Categoria="Categoria" OnGrabar="Grabar"></CategoriaEditPage>
+<div class="container mr-5 ml-5">
+    <h3>Categoria</h3>
+    <hr />
+    <CategoriaEditPage Categoria="Categoria" OnGrabar="Grabar"></CategoriaEditPage>
+</div>
+
+
 
 @code {
     public CategoriaDto Categoria { get; set; } = new CategoriaDto();

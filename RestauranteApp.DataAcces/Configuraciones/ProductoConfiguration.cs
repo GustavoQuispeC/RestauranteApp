@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestauranteApp.DataAcces.Configurations
+namespace RestauranteApp.DataAcces.Configuraciones
 {
     public class ProductoConfiguration : IEntityTypeConfiguration<Producto>
     {
@@ -21,8 +21,8 @@ namespace RestauranteApp.DataAcces.Configurations
             builder.Property(p => p.FechaVencimiento)
                 .HasColumnType("DATE");
             builder.Property(p => p.UrlImagen);
-            builder.Property(p=>p.Observacion)
-                .HasMaxLength (150);
+            builder.Property(p => p.Observacion)
+                .HasMaxLength(150);
 
         }
     }

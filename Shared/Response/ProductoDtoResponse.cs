@@ -17,15 +17,18 @@ namespace RestauranteApp.Shared.Response
         public string? Observacion { get; set; }
 
         public string Categoria { get; set; } = default!;
-
+        public int CategoriaId { get; set; }
 
         public string Marca { get; set; } = default!;
-
+        public int MarcaId { get; set; }    
 
         public string Proveedor { get; set; } = default!;
-
+        public int ProveedorId { get; set; }
 
         public string UnidadMedida { get; set; } = default!;
+        public int UnidadMedidaId { get; set; }
+
+        public string? UrlImagen { get; set; }
 
     }
 }

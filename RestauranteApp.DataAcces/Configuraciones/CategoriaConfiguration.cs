@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestauranteApp.DataAcces.Configurations
+namespace RestauranteApp.DataAcces.Configuraciones
 {
     public class CategoriaConfiguration : IEntityTypeConfiguration<Categoria>
     {

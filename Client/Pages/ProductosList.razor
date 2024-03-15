@@ -3,81 +3,85 @@
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 
-
-<h3>Productos</h3>
-<hr />
-<a href="productos/crear" class="btn btn-success">Nuevo <Icon Name="IconName.Clipboard2Fill" /></a>
-<br />
-<br />
-<div Class="row mb-5 mt-4 justify-content-start align-items-baseLine">
-    <div class="col-1">
-        <label class="form-label" for="filtro">Nombre:</label>
-    </div>
-    <div class="col-8">
-        <div class="input-group">
-            <input type="text" class=" form-control" @bind-value="Filtro" id="filtro"/>
-            <span class="input-group-text" style="cursor:pointer" @onclick="() => Filtro = string.Empty"> <Icon Name="IconName.XOctagonFill" Class="colorEliminar" /></span>
+<div class="container mr-3 ml-3">
+    <h3>Productos</h3>
+    <hr />
+    <a href="productos/crear" class="btn btn-success">Nuevo <i class="bi bi-file-earmark-plus"></i></a>
+    <br />
+    <br />
+    <div Class="row mb-5 mt-4 justify-content-start align-items-baseLine">
+        <div class="col-1">
+            <label class="form-label" for="filtro">Nombre:</label>
         </div>
-    </div>
-    <div class="col-sm">
-        <Button Type="ButtonType.Button" style="cursor:pointer" Class="btn btn-outline-primary" @onclick="Cargar"> <Icon Name="IconName.BinocularsFill" /></Button>
-    </div>
+        <div class="col-8">
+            <div class="input-group">
+                <input type="text" class=" form-control" @bind-value="Filtro" id="filtro" />
+                <span class="input-group-text" style="cursor:pointer" @onclick="() => Filtro = string.Empty"><i class="bi bi-x-octagon-fill colorEliminar"></i> </span>
+            </div>
+        </div>
+        <div class="col-sm">
+            <Button Type="ButtonType.Button" style="cursor:pointer" Class="btn btn-outline-success" @onclick="Cargar"><i class="bi bi-search"></i></Button>
+        </div>
 
-</div>
-<hr />
+    </div>
+    <hr />
 
-@if (Productos == null)
-{
-    <p><em>Cargando...</em></p>
-}
-else
-{
-    <table class="table table-hover table-bordered table-striped">
-        <thead class="color-font">
-            <tr>
-                <th>Id:</th>
-                <th>Nombre:</th>
-                <th>Stock</th>
-                <th>Unidad Medida</th>
-                <th>Precio Compra</th>
-                <th>Precio Venta:</th>
-                <th>Marca</th>
-                <th>Categoria</th>
-                <th>Proveedor</th>
-                <th>F. Vencimiento</th>
-                <th>Observación</th>
-                <th>Acciones</th>
-                
-                
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Productos)
-            {
+    @if (Productos == null)
+    {
+        <p><em>Cargando...</em></p>
+    }
+    else
+    {
+        <table class="table table-hover table-bordered table-striped">
+            <thead class="table-success">
                 <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Nombre</td>
-                    <td>@item.Stock</td>
-                    <td>@item.UnidadMedida</td>
-                    <td>@item.PrecioCompra</td>
-                    <td>@item.PrecioVenta</td>
-                    <td>@item.Marca</td>
-                    <td>@item.Categoria</td>
-                    <td>@item.Proveedor</td>
-                    <td>@item.FechaVencimiento</td>
-                    <td>@item.Observacion</td>
-                   
-                    
-                    <td>
-                        <Button Class="colorEditar" @onclick="()=>Editar(item.Id)"><Icon Name="IconName.PenFill" /></Button>
-                        <Button Class="colorEliminar" @onclick="()=>Eliminar(item.Id)"><Icon Name="IconName.TrashFill" /></Button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                    <th>Id:</th>
+                    <th>Nombre:</th>
+                    <th>Stock</th>
+                    <th>Unidad Medida</th>
+                    <th>Precio Compra</th>
+                    <th>Precio Venta:</th>
+                    <th>Marca</th>
+                    <th>Categoria</th>
+                    <th>Proveedor</th>
+                    <th>F. Vencimiento</th>
+                    <th>Observación</th>
+                    <th>Acciones</th>
 
-}
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Productos)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.Stock</td>
+                        <td>@item.UnidadMedida</td>
+                        <td>@item.PrecioCompra</td>
+                        <td>@item.PrecioVenta</td>
+                        <td>@item.Marca</td>
+                        <td>@item.Categoria</td>
+                        <td>@item.Proveedor</td>
+                        <td>@item.FechaVencimiento</td>
+                        <td>@item.Observacion</td>
+
+
+                        <td>
+                            <button Class="colorEditar" @onclick="()=>Editar(item.Id)"><i class="bi bi-pencil-fill"></i></button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button Class="colorEliminar" @onclick="()=>Eliminar(item.Id)"><i class="bi bi-trash-fill"></i></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+</div>
+
+
 
 
 @code {

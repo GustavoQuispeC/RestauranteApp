@@ -4,45 +4,49 @@
 @inject NavigationManager NavigationManager
 @attribute [Authorize]
 
-<h3>Categoria</h3>
-<hr />
-<a href="categorias/crear" class="btn btn-success">Nuevo <Icon Name="IconName.Clipboard2Fill" /></a>
-<br />
-<br />
+<div class="container mr-5 ml-5">
+    <h3>Categoria</h3>
+
+    <hr />
+    <a href="categorias/crear" class="btn btn-success">Nuevo <i class="bi bi-file-earmark-plus"></i></a>
+    <br />
+    <br />
 
 
-@if (_categorias == null)
-{
-    <p><em>Cargando...</em></p>
-}
-else
-{
-    <table class="table table-hover table-bordered table-striped">
-        <thead class="color-font">
-            <tr>
-                <th>Id:</th>
-                <th>Descripcion:</th>
-                <th>Observacion:</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in _categorias)
-            {
+    @if (_categorias == null)
+    {
+        <p><em>Cargando...</em></p>
+    }
+    else
+    {
+        <table class="table table-hover table-bordered">
+            <thead class="table-success">
                 <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Nombre</td>
-                    <td>@item.Observacion</td>
-                    <td>
-                        <Button Class="colorEditar" @onclick="()=>Editar(item.Id)"><Icon Name="IconName.PenFill" /></Button>
-                        <Button Class="colorEliminar" @onclick="()=>Eliminar(item.Id)"><Icon Name="IconName.TrashFill" /></Button>
-                    </td>
+                    <th>Id:</th>
+                    <th>Descripcion:</th>
+                    <th>Observacion:</th>
+                    <th>Acciones</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in _categorias)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.Observacion</td>
+                        <td>
+                            <button Class="colorEditar" @onclick="()=>Editar(item.Id)"><i class="bi bi-pencil-fill"></i></button>&nbsp;&nbsp;&nbsp;
+                            <button Class="colorEliminar" @onclick="()=>Eliminar(item.Id)"><i class="bi bi-trash-fill"></i></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
 
-}
+
 
 
 @code {

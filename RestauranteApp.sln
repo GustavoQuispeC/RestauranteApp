@@ -10,7 +10,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestauranteApp.Shared", "Sh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestauranteApp.Entities", "RestauranteApp.Entities\RestauranteApp.Entities.csproj", "{8F0958BC-8A9E-4850-AEE3-8A317EE7F35A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestauranteApp.DataAcces", "RestauranteApp.DataAcces\RestauranteApp.DataAcces.csproj", "{B9098489-373A-400F-9AE0-57C281A6730A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestauranteApp.DataAccess", "RestauranteApp.DataAcces\RestauranteApp.DataAccess.csproj", "{B9098489-373A-400F-9AE0-57C281A6730A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestauranteApp.Repositories", "RestauranteApp.Repositories\RestauranteApp.Repositories.csproj", "{3B00E5E4-CD46-472F-9691-E0E30303D853}"
 EndProject

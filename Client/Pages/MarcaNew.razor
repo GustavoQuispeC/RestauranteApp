@@ -3,9 +3,13 @@
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 
-<h3>Marca</h3>
-<hr />
-<MarcaEditPage Marca="Marca" OnGrabar="Grabar"></MarcaEditPage>
+<div class="container mr-5 ml-5">
+    <h3>Marca</h3>
+    <hr />
+    <MarcaEditPage Marca="Marca" OnGrabar="Grabar"></MarcaEditPage>
+</div>
+
+
 
 @code {
     public MarcaDto Marca { get; set; } = new MarcaDto();

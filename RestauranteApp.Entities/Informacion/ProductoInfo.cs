@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestauranteApp.Entities.Infos
+namespace RestauranteApp.Entities.Informacion
 {
     public class ProductoInfo
     {
@@ -26,5 +26,6 @@ namespace RestauranteApp.Entities.Infos
 
 
         public string UnidadMedida { get; set; } = default!;
+        public string? UrlImagen { get; set; }
     }
 }

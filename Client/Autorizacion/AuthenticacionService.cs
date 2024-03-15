@@ -5,9 +5,9 @@ using Blazored.SessionStorage;
 using RestauranteApp.Shared.Response;
 using Microsoft.AspNetCore.Components.Authorization;
 
-namespace RestauranteApp.Client.Auth;
+namespace RestauranteApp.Client.Autorizacion;
 
-public class AuthenticacionService :AuthenticationStateProvider
+public class AuthenticacionService : AuthenticationStateProvider
 
 {
     private readonly HttpClient _httpClient; //me permite consultar una API rest

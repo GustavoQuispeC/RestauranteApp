@@ -18,9 +18,12 @@ namespace RestauranteApp.Shared.Request
         [Display(Name ="Precio Unitario")]
         public float PrecioVenta { get; set; }
 
-        //[Range(1, 9999)]
+        [Range(1, 9999, ErrorMessage =Constantes.ValidacionRango)]
+        [Display(Name ="Precio de Compra")]
         public float PrecioCompra { get; set; }
-        //[Range(1, 9999)]
+
+        [Range(1, 9999, ErrorMessage =Constantes.ValidacionRango)]
+        [Display(Name ="Stock")]
         public int Stock { get; set; }
         public DateTime? FechaVencimiento { get; set; }
         
@@ -31,5 +34,10 @@ namespace RestauranteApp.Shared.Request
         public int MarcaId { get; set; }
         public int ProveedorId { get; set; }
         public int UnidadMedidaId { get; set; }
+
+        public string? UrlImagen { get; set; }
+
+        public string? Base64Imagen { get; set; }
+        public string? FileName { get; set; }
     }
 }

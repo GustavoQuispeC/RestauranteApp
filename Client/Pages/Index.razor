@@ -1,10 +1,197 @@
 ﻿@page "/"
-@attribute [Authorize] //llamada al Login
+@inject HttpClient HttpClient
+@inject IToastService ToastService
+@inject NavigationManager NavigationManager
 
-<PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="container mr-5 ml-5">
+    <h2>Haz tu pedido...</h2>
+    <div>
+        <div class="row justify-content-center mt-3 mb-4">
+            <div class="col-6">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar producto" @bind-value="Buscar" />
+                    <button class="btn btn-secondary" @onclick="ObtenerCatalogo">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
 
-Welcome to your new app.
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                @if (Categorias is not null)
+                {
+                    <select class="form-select" @onchange="OnSelectionChange">
+                        <option>-Categoria-</option>
+                        @foreach (var categoria in Categorias)
+                        {
+                            <option value="@categoria.Id">@categoria.Nombre</option>
+                        }
+                    </select>
+                }
+            </div>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+            <div class="col-4">
+                @if (Marcas is not null)
+                {
+                    <select class="form-select" @onchange="OnSelectionChange">
+                        <option>-Marca-</option>
+                        @foreach (var marca in Marcas)
+                        {
+                            <option value="@marca.Id">@marca.Nombre</option>
+                        }
+                    </select>
+                }
+            </div>
+            <div class="col-4">
+
+                @if (Proveedores is not null)
+                {
+                    <select class="form-select" @onchange="OnSelectionChange">
+                        <option>-Proveedor-</option>
+                        @foreach (var proveedor in Proveedores)
+                        {
+                            <option value="@proveedor.Id">@proveedor.RazonSocial</option>
+                        }
+                    </select>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="container bg-success mt-2 mb-4 text-warning" style="border-radius : 6px">
+        Apurate que se acaban...
+    </div>
+</div>
+
+
+@if (Productos is not null)
+{
+    var filter = Productos;
+    if (CategoriaSeleccionada is {} catSeleccionado) // pattern matching
+    {
+        filter = Productos.Where(p => p.CategoriaId == catSeleccionado).ToList();
+    }
+
+    if (MarcaSeleccionada is { } marcaSeleccionado) // pattern matching
+    {
+        filter = Productos.Where(p => p.MarcaId == marcaSeleccionado).ToList();
+    }
+
+    if (ProveedorSeleccionado is { } ProveedortSeleccionado) // pattern matching
+    {
+        filter = Productos.Where(p => p.ProveedorId == ProveedortSeleccionado).ToList();
+    }
+
+
+    <div class="container mb-5 gap-5">
+        <div class="row gx-4 row-cols-1 row-cols-md-3 row-cols-xl-5 justify-content-center">
+            @* Display 1,3,5 cards  per row*@
+            @foreach (var producto in filter)
+            {
+                <ProductoTarjeta Producto="producto" OnClick="VerDetalle" />
+            }
+        </div>
+    </div>
+}
+
+
+<LoadingComponent IsLoading="IsLoading" />
+
+@code {
+    public ICollection<ProductoDtoResponse>? Productos { get; set; }
+
+    public ICollection<CategoriaDto>? Categorias { get; set; }
+    private int? CategoriaSeleccionada { get; set; }
+
+    public ICollection<MarcaDto>? Marcas { get; set; }
+    private int? MarcaSeleccionada { get; set; }
+
+    public ICollection<ProveedorDto>? Proveedores { get; set; }
+    private int? ProveedorSeleccionado { get; set; }
+
+    public string Buscar { get; set; } = default!;
+
+    public bool IsLoading { get; set; }
+
+    private void OnSelectionChange(ChangeEventArgs args)
+    {
+        if (args.Value!.ToString()!.Contains("-"))
+        {
+            CategoriaSeleccionada = null;
+        }
+        else
+        {
+            CategoriaSeleccionada = int.Parse(args.Value.ToString()!);
+        }
+
+        // Verificar si la selección pertenece a la marca
+        if (args.Value!.ToString()!.Contains("-"))
+        {
+            MarcaSeleccionada = null;
+        }
+        else
+        {
+            MarcaSeleccionada = int.Parse(args.Value.ToString()!);
+        }
+
+        // Verificar si la selección pertenece al proveedor
+        if (args.Value!.ToString()!.Contains("-"))
+        {
+            ProveedorSeleccionado = null;
+        }
+        else
+        {
+            ProveedorSeleccionado = int.Parse(args.Value.ToString()!);
+        }
+    }
+
+
+    private async Task ObtenerCatalogo()
+    {
+        try
+        {
+            IsLoading = true;
+
+            Productos = await HttpClient.GetFromJsonAsync<ICollection<ProductoDtoResponse>>($"api/Productos?filtro={Buscar}");
+        }
+        catch (Exception ex)
+        {
+            ToastService.ShowError(ex.Message);
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ObtenerCatalogo();
+
+        var response = await HttpClient.GetFromJsonAsync<ICollection<CategoriaDto>>("api/Categorias");
+        if (response is not null)
+        {
+            Categorias = response;
+        }
+
+        var responseMarca = await HttpClient.GetFromJsonAsync<ICollection<MarcaDto>>("api/Marcas");
+        if (responseMarca is not null)
+        {
+            Marcas = responseMarca;
+        }
+        var responseProveedor = await HttpClient.GetFromJsonAsync<ICollection<ProveedorDto>>("api/Proveedores");
+        if (responseProveedor is not null)
+        {
+            Proveedores = responseProveedor;
+        }
+    }
+
+    private void VerDetalle(int id)
+    {
+        NavigationManager.NavigateTo($"/detalle/{id}");
+    }
+}

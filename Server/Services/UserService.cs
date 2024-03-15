@@ -117,7 +117,7 @@ namespace RestauranteApp.Server.Services
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(identity, Constantes.RolCliente);
-
+                    //agregando cliente a la tabla cliente
                     var cliente = new Cliente
                     {
                         Nombres = request.NombreCompleto.Split(" ", StringSplitOptions.RemoveEmptyEntries).First(),

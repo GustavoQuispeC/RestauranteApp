@@ -1,5 +1,5 @@
 ﻿@page "/login"
-@using RestauranteApp.Client.Auth
+@using RestauranteApp.Client.Autorizacion
 
 @inject HttpClient HttpClient
 @inject AuthenticationStateProvider AuthenticationStateProvider
@@ -7,10 +7,15 @@
 @inject IToastService ToastService
 
 <div class="container">
+   
+</div>
+    <img src="/assets/images/users_person_people_6080.png" class="rounded mx-auto d-block" alt="...">
+<div class="container">
+   
     <div class="row justify-content-center">
         <div class="col-lg-5">
-            <div class="card shadow-lg mt-5">
-                <div class="card-header">
+            <div class="card shadow-lg mt-2 mb-5">
+                <div class="card-header text-white text-center bg-success">
                     <h3>Inicio de Sesion</h3>
                 </div>
                 <div class="card-body">
@@ -29,7 +34,7 @@
                             <ValidationMessage For="() => LoginDtoRequest.Password" />
                         </div>
                         <div class="d-grid gap-1 mt-4 mb-0">
-                            <button class="btn btn-primary" type="submit">Ingresar</button>
+                            <button class="btn btn-success" type="submit">Ingresar</button>
                         </div>
                     </EditForm>
                 </div>

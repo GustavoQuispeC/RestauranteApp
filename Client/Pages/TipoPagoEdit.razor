@@ -3,10 +3,13 @@
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 
-<h3>Tipo de Pago</h3>
-<hr />
+<div class="container mr-5 ml-5">
+    <h3>Tipo de Pago</h3>
+    <hr />
 
-<TipoPagoEditPage TipoPago="Registro" OnGrabar="Actualizar"></TipoPagoEditPage>
+    <TipoPagoEditPage TipoPago="Registro" OnGrabar="Actualizar"></TipoPagoEditPage>
+
+</div>
 
 @code {
     [Parameter]

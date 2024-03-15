@@ -1,14 +1,17 @@
 ﻿@using RestauranteApp.Shared
 
 
-    
 
-    <EditForm Model="Marca" OnSubmit="Grabar">
+
+<EditForm Model="Marca" OnSubmit="Grabar">
         <div class="row row-cols-1 row-cols-md-2">
             <div class="col>">
                 <div class="mb-3 row">
                     <label class="form-label" form="Nombre">Descripción:</label>
-                    <input type="text" id="Nombre" class="form-control" @bind-value="Marca.Nombre" />
+                    <input type="text" id="Nombre" class="form-control" @bind-value="Marca.Nombre"/>
+                <div class="invalid-feedback">
+                    Por favor, debe ingresar una nueva marca.
+                </div>
                 </div>
                 <div class="mb-3 row">
                     <label class="form-label" form="Observacion">Observación:</label>
@@ -17,8 +20,9 @@
             </div>
 
         </div>
+    
         <div class="row row-cols-1">
-        <Button Type="ButtonType.Submit" Class="btn btn-success w-25">Grabar <Icon Name="IconName.CheckCircle" /></Button>
+        <button Type="submit" Class="btn btn-success w-25">Grabar <i class="bi bi-floppy"></i></button>
         </div>
 
     </EditForm>

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using RestauranteApp.DataAcces.Data;
 using RestauranteApp.Entities;
-using RestauranteApp.Entities.Infos;
+using RestauranteApp.Entities.Informacion;
 using RestauranteApp.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -41,8 +41,8 @@ namespace RestauranteApp.Repositories.Implementaciones
                     Categoria = x.Categoria.Nombre,
                     Marca = x.Marca.Nombre,
                     Proveedor = x.Proveedor.RazonSocial,
-                    UnidadMedida = x.UnidadMedida.Nombre
-
+                    UnidadMedida = x.UnidadMedida.Nombre,
+                    UrlImagen = x.UrlImagen
                 })
                 .AsNoTracking()
                 .ToListAsync();

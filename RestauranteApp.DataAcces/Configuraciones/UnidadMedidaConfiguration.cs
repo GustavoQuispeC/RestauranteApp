@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestauranteApp.DataAcces.Configurations
+namespace RestauranteApp.DataAcces.Configuraciones
 {
     public class UnidadMedidaConfiguration : IEntityTypeConfiguration<UnidadMedida>
     {
@@ -20,10 +20,11 @@ namespace RestauranteApp.DataAcces.Configurations
                 new() { Id = 1,Nombre="Unidad" },
                 new() { Id = 2,Nombre="Litro" },
                 new() { Id = 3,Nombre="Caja"},
-                new() { Id = 4,Nombre="Paquete"}
+                new() { Id = 4,Nombre="Paquete"},
+                new() { Id = 5,Nombre="Porcion"}
             };
             builder.HasData(lista);
-               
+
         }
     }
 }

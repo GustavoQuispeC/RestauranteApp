@@ -1,22 +1,16 @@
-using ECommerceWeb.DataAccess;
+using RestauranteApp.DataAccess;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RestauranteApp.DataAcces.Data;
-using RestauranteApp.DataAccess;
 using RestauranteApp.Repositories.Implementaciones;
 using RestauranteApp.Repositories.Interfaces;
 using RestauranteApp.Server.Services;
 using System.Text;
+using RestauranteApp.Server.PerfilesAutomapper;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-//builder.Services.AddControllersWithViews();
-//builder.Services.AddRazorPages();
 
 builder.Services.AddControllers();
 builder.Services.AddTransient<IProveedorRepository, ProveedorRepository>();
@@ -26,26 +20,29 @@ builder.Services.AddTransient<ITipoPagoRepository, TipoPagoRepository>();
 builder.Services.AddTransient<IProductoRepository, ProductoRepository>();
 builder.Services.AddTransient<IUnidadMedidaRepository, UnidadMedidaRepository>();
 builder.Services.AddTransient<IClienteRepository, ClienteRepository>();
-
+builder.Services.AddTransient<IMovimientoRepository, MovimientoRepository>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IFileUpload, FileUpload>();
 
-
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<MovimientoProfile>();
+});
 
 builder.Services.AddDbContext<RestauranteAppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("RestauranteAppDb"));
 });
 
-// Configuramos ASP.NET Identity Core - politicas
-builder.Services.AddIdentity<IdentityUserRestauranteApp, IdentityRole>(policies =>
+// Configuracion de las politicas de  ASP.NET Identity Core
+builder.Services.AddIdentity<IdentityUserRestauranteApp, IdentityRole>(politicas =>
 {
-    policies.Password.RequireDigit = false;
-    policies.Password.RequireLowercase = true;
-    policies.Password.RequireUppercase = true;
-    policies.Password.RequireNonAlphanumeric = false;
-    policies.Password.RequiredLength = 8;
-
-    policies.User.RequireUniqueEmail = true; //Valida correo electronico
+    politicas.Password.RequireDigit = false;
+    politicas.Password.RequireLowercase = true;
+    politicas.Password.RequireUppercase = true;
+    politicas.Password.RequireNonAlphanumeric = false;
+    politicas.Password.RequiredLength = 8;
+    politicas.User.RequireUniqueEmail = true; //Valida correo electronico
 })
     .AddEntityFrameworkStores<RestauranteAppDbContext>()
     .AddDefaultTokenProviders(); //token proveido por identity
@@ -70,13 +67,9 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
-
-
-
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configuracion de HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();
@@ -92,13 +85,11 @@ app.UseHttpsRedirection();
 
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
-
 app.UseRouting();
 //Authentication y autorizacion
 app.UseAuthentication();
 app.UseAuthorization();
 
-//app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
 
@@ -107,5 +98,4 @@ using (var scope = app.Services.CreateScope())
 {
     await UserDataSeeder.Seed(scope.ServiceProvider);
 }
-
 app.Run();

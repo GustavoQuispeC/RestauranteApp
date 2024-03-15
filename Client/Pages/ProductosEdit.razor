@@ -2,21 +2,25 @@
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 
-@if(ProductoModificado.Id == 0)
-{
-    <p>Cargando...</p>
-}
-else
-{
-    <ProductoEditPage onGrabar="Actualizar"
-                      Categorias="Categorias"
-                      Marcas="Marcas"
-                      Proveedores="Proveedores"
-                      UnidadMedidas="UnidadMedidas"
-                      Request="ProductoModificado"
-                      Titulo="Actualizar Producto">
-    </ProductoEditPage>
-}
+<div class="container mr-5 ml-5">
+    @if (ProductoModificado.Id == 0)
+    {
+        <p>Cargando...</p>
+    }
+    else
+    {
+        <ProductoEditPage onGrabar="Actualizar"
+                          Categorias="Categorias"
+                          Marcas="Marcas"
+                          Proveedores="Proveedores"
+                          UnidadMedidas="UnidadMedidas"
+                          Request="ProductoModificado"
+                          Titulo="Actualizar Producto">
+        </ProductoEditPage>
+    }
+</div>
+
+
 
 
 

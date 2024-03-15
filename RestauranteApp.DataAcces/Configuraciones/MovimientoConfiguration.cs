@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestauranteApp.DataAcces.Configurations
+namespace RestauranteApp.DataAcces.Configuraciones
 {
     public class MovimientoConfiguration : IEntityTypeConfiguration<Movimiento>
     {
         public void Configure(EntityTypeBuilder<Movimiento> builder)
         {
-            builder.Property(p => p.Monto);
+            builder.Property(p => p.Total);
             builder.Property(p => p.Descuento);
             builder.Property(p => p.MontoFinal);
             builder.Property(p => p.PagoRecibido);

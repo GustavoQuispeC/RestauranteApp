@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestauranteApp.DataAcces.Configurations
+namespace RestauranteApp.DataAcces.Configuraciones
 {
     public class TipoPagoConfiguration : IEntityTypeConfiguration<TipoPago>
     {
@@ -15,7 +15,7 @@ namespace RestauranteApp.DataAcces.Configurations
         {
             builder.Property(p => p.Nombre)
                 .HasMaxLength(100);
-            builder.Property(p=>p.Observacion)
+            builder.Property(p => p.Observacion)
                 .HasMaxLength(150);
             var lista = new List<TipoPago>
             {

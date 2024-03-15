@@ -3,9 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using RestauranteApp.DataAccess;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace RestauranteApp.DataAcces.Data
 {
@@ -20,6 +18,13 @@ namespace RestauranteApp.DataAcces.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(RestauranteAppDbContext).Assembly);
+        }
+        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        {
+            base.ConfigureConventions(configurationBuilder);
+
+            configurationBuilder.Properties<string>()
+                .HaveMaxLength(100);
         }
     }
 }

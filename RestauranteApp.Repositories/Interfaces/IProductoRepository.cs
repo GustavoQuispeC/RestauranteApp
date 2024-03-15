@@ -1,10 +1,6 @@
 ﻿using RestauranteApp.Entities;
-using RestauranteApp.Entities.Infos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RestauranteApp.Entities.Informacion;
+
 
 namespace RestauranteApp.Repositories.Interfaces
 {

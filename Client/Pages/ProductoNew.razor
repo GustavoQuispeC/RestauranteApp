@@ -3,22 +3,26 @@
 @inject NavigationManager NavigationManager
 @attribute [Authorize(Roles =Constantes.RolAdministrador)] //solo ingrasara si es administrador
 
-@if(Categorias !=null && Marcas != null)
-{
-    <ProductoEditPage 
-        onGrabar="Crear" 
-        Titulo="Crear nuevo Producto" 
-        Request="ProductoNuevo" 
-        Categorias="Categorias" 
-        Marcas="Marcas" 
-        Proveedores="Proveedores" 
-        UnidadMedidas="UnidadMedidas">
-    </ProductoEditPage>
-}
-else
-{
-    <p>Cargando...</p>
-}
+
+<div class="container mr-5 ml-5">
+    @if (Categorias != null && Marcas != null)
+    {
+        <ProductoEditPage onGrabar="Crear"
+                          Titulo="Crear nuevo Producto"
+                          Request="ProductoNuevo"
+                          Categorias="Categorias"
+                          Marcas="Marcas"
+                          Proveedores="Proveedores"
+                          UnidadMedidas="UnidadMedidas">
+        </ProductoEditPage>
+    }
+    else
+    {
+        <p>Cargando...</p>
+    }
+
+</div>
+
 
 
 @code {

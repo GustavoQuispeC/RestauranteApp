@@ -3,56 +3,59 @@
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 
+<div class="container mr-5 ml-5">
+    <h3>Proveedor</h3>
+    <hr />
+    <a href="proveedores/crear" class="btn btn-success">Nuevo <i class="bi bi-file-earmark-plus"></i></a>
+    <br />
+    <br />
 
-<h3>Proveedor</h3>
-<hr />
-<a href="proveedores/crear" class="btn btn-success" >Nuevo <Icon Name="IconName.PersonAdd" /></a>
-<br />
-<br />
 
-
-@if(_proveedor == null)
-{
-    <p><em>Cargando...</em></p>
-}
-else
-{
-    <table class="table table-hover table-bordered table-striped" >
-        <thead class="color-font">
-            <tr>
-                <th>Id:</th>
-                <th>Razón Social:</th>
-                <th>Nombres:</th>
-                <th>Apellidos:</th>
-                <th>Teléfono:</th>
-                <th>Correo:</th>
-                <th>Observacion:</th>
-                <th>Fecha registro:</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var item in _proveedor)
-            {
+    @if (_proveedor == null)
+    {
+        <p><em>Cargando...</em></p>
+    }
+    else
+    {
+        <table class="table table-hover table-bordered table-striped">
+            <thead class="table-success">
                 <tr>
-                    <td>@item.Id</td>
-                    <td>@item.RazonSocial</td>
-                    <td>@item.Nombres</td>
-                    <td>@item.Apellidos</td>
-                    <td>@item.Telefono</td>
-                    <td>@item.Email</td>
-                    <td>@item.Observacion</td>
-                    <td>@item.FechaCreacion</td>
-                    <td>
-                        <Button Class="colorEditar" @onclick="()=>Editar(item.Id)"><Icon Name="IconName.PenFill" /></Button>
-                        <Button Class="colorEliminar" @onclick="()=>Eliminar(item.Id)"><Icon Name="IconName.TrashFill" /></Button>
-                    </td>
+                    <th>Id:</th>
+                    <th>Razón Social:</th>
+                    <th>Nombres:</th>
+                    <th>Apellidos:</th>
+                    <th>Teléfono:</th>
+                    <th>Correo:</th>
+                    <th>Observacion:</th>
+                    <th>Fecha registro:</th>
+                    <th>Acciones</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-    
-}
+            </thead>
+            <tbody>
+                @foreach (var item in _proveedor)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.RazonSocial</td>
+                        <td>@item.Nombres</td>
+                        <td>@item.Apellidos</td>
+                        <td>@item.Telefono</td>
+                        <td>@item.Email</td>
+                        <td>@item.Observacion</td>
+                        <td>@item.FechaCreacion</td>
+                        <td>
+                            <Button Class="colorEditar" @onclick="()=>Editar(item.Id)"><i class="bi bi-pencil-fill"></i></Button>&nbsp;&nbsp;&nbsp;
+                            <Button Class="colorEliminar" @onclick="()=>Eliminar(item.Id)"><i class="bi bi-trash-fill"></i></Button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+</div>
+
+
 
 
 
