@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using RestauranteApp.DataAcces.Data;
 using RestauranteApp.Entities;
 using RestauranteApp.Repositories.Interfaces;
 using RestauranteApp.Server.Services;
@@ -12,26 +14,32 @@ namespace RestauranteApp.Server.Controllers
     {
         private readonly IProductoRepository _repository;
         public IFileUpload _fileUpload;
+        
 
         public ProductosController(IProductoRepository repository, IFileUpload fileUpload)
         {
             _repository = repository;
             _fileUpload = fileUpload;
+            
         }
 
-        //Get: api/productos
-        //Get: api/productos?filtro=string
+
         //[HttpGet]
         //public async Task<IActionResult> Get()
         //{
         //    return Ok(await _repository.ListarAsync());
         //}
 
+        //Get: api/productos
+        //Get: api/productos?filtro=string
+
         [HttpGet]
         public async Task<IActionResult> Get(string? filtro)
         {
             return Ok(await _repository.ListarAsync(filtro));
         }
+
+
 
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)

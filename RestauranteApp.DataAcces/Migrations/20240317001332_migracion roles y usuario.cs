@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RestauranteApp.DataAcces.Migrations
 {
     /// <inheritdoc />
-    public partial class TablasSeguridad : Migration
+    public partial class migracionrolesyusuario : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,14 +16,48 @@ namespace RestauranteApp.DataAcces.Migrations
                 table: "Proveedor",
                 newName: "Email");
 
+            migrationBuilder.RenameColumn(
+                name: "Monto",
+                table: "Movimiento",
+                newName: "Total");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Email",
+                table: "Proveedor",
+                type: "varchar(100)",
+                unicode: false,
+                maxLength: 100,
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "varchar(max)",
+                oldUnicode: false,
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "UrlImagen",
+                table: "Producto",
+                type: "nvarchar(100)",
+                maxLength: 100,
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)",
+                oldNullable: true);
+
+            migrationBuilder.AddColumn<int>(
+                name: "ClienteId",
+                table: "Movimiento",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -34,19 +68,19 @@ namespace RestauranteApp.DataAcces.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    NombreCompleto = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    NombreCompleto = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     FechaNacimiento = table.Column<DateTime>(type: "DATE", nullable: false),
-                    Direccion = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Direccion = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PasswordHash = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
@@ -59,14 +93,29 @@ namespace RestauranteApp.DataAcces.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TipoCliente",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Descripcion = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    FechaCreacion = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Estado = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TipoCliente", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    RoleId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -85,9 +134,9 @@ namespace RestauranteApp.DataAcces.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -104,10 +153,10 @@ namespace RestauranteApp.DataAcces.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    LoginProvider = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -124,8 +173,8 @@ namespace RestauranteApp.DataAcces.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    RoleId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -148,10 +197,10 @@ namespace RestauranteApp.DataAcces.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -164,138 +213,173 @@ namespace RestauranteApp.DataAcces.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Cliente",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombres = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Apellidos = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Email = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
+                    FechaNacimiento = table.Column<DateTime>(type: "DATE", nullable: false),
+                    TipoClienteId = table.Column<int>(type: "int", nullable: false),
+                    FechaCreacion = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Estado = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cliente", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cliente_TipoCliente_TipoClienteId",
+                        column: x => x.TipoClienteId,
+                        principalTable: "TipoCliente",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.UpdateData(
                 table: "Categoria",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "FechaCreacion",
-                value: new DateTime(2024, 2, 22, 12, 57, 57, 327, DateTimeKind.Local).AddTicks(5976));
+                value: new DateTime(2024, 3, 16, 19, 13, 31, 899, DateTimeKind.Local).AddTicks(3013));
 
             migrationBuilder.UpdateData(
                 table: "Categoria",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "FechaCreacion",
-                value: new DateTime(2024, 2, 22, 12, 57, 57, 327, DateTimeKind.Local).AddTicks(5997));
+                value: new DateTime(2024, 3, 16, 19, 13, 31, 899, DateTimeKind.Local).AddTicks(3035));
 
             migrationBuilder.UpdateData(
                 table: "Categoria",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "FechaCreacion",
-                value: new DateTime(2024, 2, 22, 12, 57, 57, 327, DateTimeKind.Local).AddTicks(6000));
+                value: new DateTime(2024, 3, 16, 19, 13, 31, 899, DateTimeKind.Local).AddTicks(3038));
 
             migrationBuilder.UpdateData(
                 table: "Categoria",
                 keyColumn: "Id",
                 keyValue: 4,
                 column: "FechaCreacion",
-                value: new DateTime(2024, 2, 22, 12, 57, 57, 327, DateTimeKind.Local).AddTicks(6002));
+                value: new DateTime(2024, 3, 16, 19, 13, 31, 899, DateTimeKind.Local).AddTicks(3040));
 
             migrationBuilder.UpdateData(
                 table: "Categoria",
                 keyColumn: "Id",
                 keyValue: 5,
                 column: "FechaCreacion",
-                value: new DateTime(2024, 2, 22, 12, 57, 57, 327, DateTimeKind.Local).AddTicks(6005));
+                value: new DateTime(2024, 3, 16, 19, 13, 31, 899, DateTimeKind.Local).AddTicks(3042));
 
             migrationBuilder.UpdateData(
                 table: "Categoria",
                 keyColumn: "Id",
                 keyValue: 6,
                 column: "FechaCreacion",
-                value: new DateTime(2024, 2, 22, 12, 57, 57, 327, DateTimeKind.Local).AddTicks(6009));
+                value: new DateTime(2024, 3, 16, 19, 13, 31, 899, DateTimeKind.Local).AddTicks(3047));
 
             migrationBuilder.UpdateData(
                 table: "Marca",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "FechaCreacion",
-                value: new DateTime(2024, 2, 22, 12, 57, 57, 361, DateTimeKind.Local).AddTicks(6936));
+                value: new DateTime(2024, 3, 16, 19, 13, 31, 944, DateTimeKind.Local).AddTicks(9342));
 
             migrationBuilder.UpdateData(
                 table: "Marca",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "FechaCreacion",
-                value: new DateTime(2024, 2, 22, 12, 57, 57, 361, DateTimeKind.Local).AddTicks(6958));
+                value: new DateTime(2024, 3, 16, 19, 13, 31, 944, DateTimeKind.Local).AddTicks(9367));
 
             migrationBuilder.UpdateData(
                 table: "Marca",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "FechaCreacion",
-                value: new DateTime(2024, 2, 22, 12, 57, 57, 361, DateTimeKind.Local).AddTicks(6962));
+                value: new DateTime(2024, 3, 16, 19, 13, 31, 944, DateTimeKind.Local).AddTicks(9370));
 
             migrationBuilder.UpdateData(
                 table: "Marca",
                 keyColumn: "Id",
                 keyValue: 4,
                 column: "FechaCreacion",
-                value: new DateTime(2024, 2, 22, 12, 57, 57, 361, DateTimeKind.Local).AddTicks(6964));
+                value: new DateTime(2024, 3, 16, 19, 13, 31, 944, DateTimeKind.Local).AddTicks(9373));
 
             migrationBuilder.UpdateData(
                 table: "Marca",
                 keyColumn: "Id",
                 keyValue: 5,
                 column: "FechaCreacion",
-                value: new DateTime(2024, 2, 22, 12, 57, 57, 361, DateTimeKind.Local).AddTicks(6967));
+                value: new DateTime(2024, 3, 16, 19, 13, 31, 944, DateTimeKind.Local).AddTicks(9375));
 
             migrationBuilder.UpdateData(
                 table: "TipoPago",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "FechaCreacion",
-                value: new DateTime(2024, 2, 22, 12, 57, 57, 362, DateTimeKind.Local).AddTicks(8744));
+                value: new DateTime(2024, 3, 16, 19, 13, 31, 946, DateTimeKind.Local).AddTicks(218));
 
             migrationBuilder.UpdateData(
                 table: "TipoPago",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "FechaCreacion",
-                value: new DateTime(2024, 2, 22, 12, 57, 57, 362, DateTimeKind.Local).AddTicks(8764));
+                value: new DateTime(2024, 3, 16, 19, 13, 31, 946, DateTimeKind.Local).AddTicks(237));
 
             migrationBuilder.UpdateData(
                 table: "TipoPago",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "FechaCreacion",
-                value: new DateTime(2024, 2, 22, 12, 57, 57, 362, DateTimeKind.Local).AddTicks(8768));
+                value: new DateTime(2024, 3, 16, 19, 13, 31, 946, DateTimeKind.Local).AddTicks(240));
 
             migrationBuilder.UpdateData(
                 table: "TipoPago",
                 keyColumn: "Id",
                 keyValue: 4,
                 column: "FechaCreacion",
-                value: new DateTime(2024, 2, 22, 12, 57, 57, 362, DateTimeKind.Local).AddTicks(8770));
+                value: new DateTime(2024, 3, 16, 19, 13, 31, 946, DateTimeKind.Local).AddTicks(242));
 
             migrationBuilder.UpdateData(
                 table: "UnidadMedida",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "FechaCreacion",
-                value: new DateTime(2024, 2, 22, 12, 57, 57, 363, DateTimeKind.Local).AddTicks(565));
+                value: new DateTime(2024, 3, 16, 19, 13, 31, 946, DateTimeKind.Local).AddTicks(3649));
 
             migrationBuilder.UpdateData(
                 table: "UnidadMedida",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "FechaCreacion",
-                value: new DateTime(2024, 2, 22, 12, 57, 57, 363, DateTimeKind.Local).AddTicks(573));
+                value: new DateTime(2024, 3, 16, 19, 13, 31, 946, DateTimeKind.Local).AddTicks(3668));
 
             migrationBuilder.UpdateData(
                 table: "UnidadMedida",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "FechaCreacion",
-                value: new DateTime(2024, 2, 22, 12, 57, 57, 363, DateTimeKind.Local).AddTicks(575));
+                value: new DateTime(2024, 3, 16, 19, 13, 31, 946, DateTimeKind.Local).AddTicks(3671));
 
             migrationBuilder.UpdateData(
                 table: "UnidadMedida",
                 keyColumn: "Id",
                 keyValue: 4,
                 column: "FechaCreacion",
-                value: new DateTime(2024, 2, 22, 12, 57, 57, 363, DateTimeKind.Local).AddTicks(577));
+                value: new DateTime(2024, 3, 16, 19, 13, 31, 946, DateTimeKind.Local).AddTicks(3675));
+
+            migrationBuilder.InsertData(
+                table: "UnidadMedida",
+                columns: new[] { "Id", "Estado", "FechaCreacion", "Nombre" },
+                values: new object[] { 5, true, new DateTime(2024, 3, 16, 19, 13, 31, 946, DateTimeKind.Local).AddTicks(3677), "Porcion" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Movimiento_ClienteId",
+                table: "Movimiento",
+                column: "ClienteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -335,11 +419,28 @@ namespace RestauranteApp.DataAcces.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cliente_TipoClienteId",
+                table: "Cliente",
+                column: "TipoClienteId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Movimiento_Cliente_ClienteId",
+                table: "Movimiento",
+                column: "ClienteId",
+                principalTable: "Cliente",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Movimiento_Cliente_ClienteId",
+                table: "Movimiento");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -356,15 +457,61 @@ namespace RestauranteApp.DataAcces.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Cliente");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
+            migrationBuilder.DropTable(
+                name: "TipoCliente");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Movimiento_ClienteId",
+                table: "Movimiento");
+
+            migrationBuilder.DeleteData(
+                table: "UnidadMedida",
+                keyColumn: "Id",
+                keyValue: 5);
+
+            migrationBuilder.DropColumn(
+                name: "ClienteId",
+                table: "Movimiento");
+
             migrationBuilder.RenameColumn(
                 name: "Email",
                 table: "Proveedor",
                 newName: "email");
+
+            migrationBuilder.RenameColumn(
+                name: "Total",
+                table: "Movimiento",
+                newName: "Monto");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "email",
+                table: "Proveedor",
+                type: "varchar(max)",
+                unicode: false,
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "varchar(100)",
+                oldUnicode: false,
+                oldMaxLength: 100,
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "UrlImagen",
+                table: "Producto",
+                type: "nvarchar(max)",
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(100)",
+                oldMaxLength: 100,
+                oldNullable: true);
 
             migrationBuilder.UpdateData(
                 table: "Categoria",

@@ -24,6 +24,10 @@ namespace RestauranteApp.Entities.Informacion
 
         public string? Proveedor { get; set; } = default!;
 
+        public int CategoriaId { get; set; }
+        public int MarcaId { get; set; }
+        public int ProveedorId { get; set; }
+
 
         public string UnidadMedida { get; set; } = default!;
         public string? UrlImagen { get; set; }

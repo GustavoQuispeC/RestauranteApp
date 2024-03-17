@@ -12,8 +12,8 @@ using RestauranteApp.DataAcces.Data;
 namespace RestauranteApp.DataAcces.Migrations
 {
     [DbContext(typeof(RestauranteAppDbContext))]
-    [Migration("20240315032849_Migracion_cliente")]
-    partial class Migracion_cliente
+    [Migration("20240317001332_migracion roles y usuario")]
+    partial class migracionrolesyusuario
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -325,7 +325,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 1,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 495, DateTimeKind.Local).AddTicks(4964),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 899, DateTimeKind.Local).AddTicks(3013),
                             Nombre = "Parrilla",
                             Observacion = ""
                         },
@@ -333,7 +333,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 2,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 495, DateTimeKind.Local).AddTicks(4992),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 899, DateTimeKind.Local).AddTicks(3035),
                             Nombre = "Hamburguesa",
                             Observacion = ""
                         },
@@ -341,7 +341,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 3,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 495, DateTimeKind.Local).AddTicks(4996),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 899, DateTimeKind.Local).AddTicks(3038),
                             Nombre = "Gaseosa",
                             Observacion = ""
                         },
@@ -349,7 +349,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 4,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 495, DateTimeKind.Local).AddTicks(4998),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 899, DateTimeKind.Local).AddTicks(3040),
                             Nombre = "Cerveza",
                             Observacion = ""
                         },
@@ -357,7 +357,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 5,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 495, DateTimeKind.Local).AddTicks(5001),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 899, DateTimeKind.Local).AddTicks(3042),
                             Nombre = "Wisky",
                             Observacion = ""
                         },
@@ -365,7 +365,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 6,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 495, DateTimeKind.Local).AddTicks(5007),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 899, DateTimeKind.Local).AddTicks(3047),
                             Nombre = "Pisco",
                             Observacion = ""
                         });
@@ -488,7 +488,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 1,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 530, DateTimeKind.Local).AddTicks(6015),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 944, DateTimeKind.Local).AddTicks(9342),
                             Nombre = "Inka Kola",
                             Observacion = ""
                         },
@@ -496,7 +496,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 2,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 530, DateTimeKind.Local).AddTicks(6049),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 944, DateTimeKind.Local).AddTicks(9367),
                             Nombre = "Coca Cola",
                             Observacion = ""
                         },
@@ -504,7 +504,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 3,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 530, DateTimeKind.Local).AddTicks(6052),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 944, DateTimeKind.Local).AddTicks(9370),
                             Nombre = "Queirolo",
                             Observacion = ""
                         },
@@ -512,7 +512,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 4,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 530, DateTimeKind.Local).AddTicks(6054),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 944, DateTimeKind.Local).AddTicks(9373),
                             Nombre = "Tabernero",
                             Observacion = ""
                         },
@@ -520,7 +520,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 5,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 530, DateTimeKind.Local).AddTicks(6057),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 944, DateTimeKind.Local).AddTicks(9375),
                             Nombre = "Pilsen",
                             Observacion = ""
                         });
@@ -746,7 +746,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 1,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 531, DateTimeKind.Local).AddTicks(7896),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 946, DateTimeKind.Local).AddTicks(218),
                             Nombre = "Efectivo",
                             Observacion = ""
                         },
@@ -754,7 +754,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 2,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 531, DateTimeKind.Local).AddTicks(7921),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 946, DateTimeKind.Local).AddTicks(237),
                             Nombre = "Transferencia",
                             Observacion = ""
                         },
@@ -762,7 +762,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 3,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 531, DateTimeKind.Local).AddTicks(7925),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 946, DateTimeKind.Local).AddTicks(240),
                             Nombre = "Yape",
                             Observacion = ""
                         },
@@ -770,7 +770,7 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 4,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 531, DateTimeKind.Local).AddTicks(7928),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 946, DateTimeKind.Local).AddTicks(242),
                             Nombre = "Plin",
                             Observacion = ""
                         });
@@ -804,35 +804,35 @@ namespace RestauranteApp.DataAcces.Migrations
                         {
                             Id = 1,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 531, DateTimeKind.Local).AddTicks(9855),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 946, DateTimeKind.Local).AddTicks(3649),
                             Nombre = "Unidad"
                         },
                         new
                         {
                             Id = 2,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 531, DateTimeKind.Local).AddTicks(9862),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 946, DateTimeKind.Local).AddTicks(3668),
                             Nombre = "Litro"
                         },
                         new
                         {
                             Id = 3,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 531, DateTimeKind.Local).AddTicks(9865),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 946, DateTimeKind.Local).AddTicks(3671),
                             Nombre = "Caja"
                         },
                         new
                         {
                             Id = 4,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 531, DateTimeKind.Local).AddTicks(9867),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 946, DateTimeKind.Local).AddTicks(3675),
                             Nombre = "Paquete"
                         },
                         new
                         {
                             Id = 5,
                             Estado = true,
-                            FechaCreacion = new DateTime(2024, 3, 14, 22, 28, 49, 531, DateTimeKind.Local).AddTicks(9869),
+                            FechaCreacion = new DateTime(2024, 3, 16, 19, 13, 31, 946, DateTimeKind.Local).AddTicks(3677),
                             Nombre = "Porcion"
                         });
                 });

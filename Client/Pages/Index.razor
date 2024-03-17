@@ -76,12 +76,12 @@
         filter = Productos.Where(p => p.CategoriaId == catSeleccionado).ToList();
     }
 
-    if (MarcaSeleccionada is { } marcaSeleccionado) // pattern matching
+    if (MarcaSeleccionada is { } marcaSeleccionado) 
     {
         filter = Productos.Where(p => p.MarcaId == marcaSeleccionado).ToList();
     }
 
-    if (ProveedorSeleccionado is { } ProveedortSeleccionado) // pattern matching
+    if (ProveedorSeleccionado is { } ProveedortSeleccionado) 
     {
         filter = Productos.Where(p => p.ProveedorId == ProveedortSeleccionado).ToList();
     }
@@ -117,6 +117,7 @@
 
     public bool IsLoading { get; set; }
 
+
     private void OnSelectionChange(ChangeEventArgs args)
     {
         if (args.Value!.ToString()!.Contains("-"))
@@ -128,7 +129,7 @@
             CategoriaSeleccionada = int.Parse(args.Value.ToString()!);
         }
 
-        // Verificar si la selección pertenece a la marca
+        //Verificar si la selección pertenece a la marca
         if (args.Value!.ToString()!.Contains("-"))
         {
             MarcaSeleccionada = null;
@@ -138,7 +139,7 @@
             MarcaSeleccionada = int.Parse(args.Value.ToString()!);
         }
 
-        // Verificar si la selección pertenece al proveedor
+        //Verificar si la selección pertenece al proveedor
         if (args.Value!.ToString()!.Contains("-"))
         {
             ProveedorSeleccionado = null;
@@ -149,6 +150,9 @@
         }
     }
 
+   
+
+
 
     private async Task ObtenerCatalogo()
     {
@@ -157,6 +161,7 @@
             IsLoading = true;
 
             Productos = await HttpClient.GetFromJsonAsync<ICollection<ProductoDtoResponse>>($"api/Productos?filtro={Buscar}");
+
         }
         catch (Exception ex)
         {
@@ -195,3 +200,4 @@
         NavigationManager.NavigateTo($"/detalle/{id}");
     }
 }
+

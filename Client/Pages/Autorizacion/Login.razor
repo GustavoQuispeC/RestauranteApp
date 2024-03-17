@@ -6,42 +6,56 @@
 @inject NavigationManager NavigationManager
 @inject IToastService ToastService
 
-<div class="container">
-   
-</div>
-    <img src="/assets/images/users_person_people_6080.png" class="rounded mx-auto d-block" alt="...">
-<div class="container">
-   
-    <div class="row justify-content-center">
-        <div class="col-lg-5">
-            <div class="card shadow-lg mt-2 mb-5">
-                <div class="card-header text-white text-center bg-success">
-                    <h3>Inicio de Sesion</h3>
-                </div>
-                <div class="card-body">
-                    <EditForm Model="@LoginDtoRequest" OnValidSubmit="ValidLogin">
-                        <DataAnnotationsValidator />
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="usuario" @bind-value="LoginDtoRequest.Usuario"
-                                   placeholder="usuario" autocomplete="true" />
-                            <label for="usuario">Usuario</label>
-                            <ValidationMessage For="() => LoginDtoRequest.Usuario" />
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="password" @bind-value="LoginDtoRequest.Password"
-                                   placeholder="clave" autocomplete="true" />
-                            <label for="usuario">Clave</label>
-                            <ValidationMessage For="() => LoginDtoRequest.Password" />
-                        </div>
-                        <div class="d-grid gap-1 mt-4 mb-0">
-                            <button class="btn btn-success" type="submit">Ingresar</button>
-                        </div>
-                    </EditForm>
-                </div>
+
+
+    <div class="contenedor">
+
+        <div class="screen">
+            <div class="screen__content">
+                <EditForm Model="@LoginDtoRequest" class="login" OnValidSubmit="ValidLogin">
+                    <DataAnnotationsValidator />
+                    <div class="login__field">
+                    <i class="login__icon bi bi-person-circle"></i>
+                        <input type="text" class="login__input" @bind-value="LoginDtoRequest.Usuario" placeholder="Usuario">
+                        <ValidationMessage For="() => LoginDtoRequest.Usuario" />
+                    </div>
+                    <div class="login__field">
+                    <i class="login__icon bi bi-lock-fill"></i>
+                        <input type="password" class="login__input" @bind-value="LoginDtoRequest.Password" placeholder="Password">
+                    </div>
+                    <button class="button login__submit" type="submit">
+                        <span class="button__text">Iniciar sesión ahora</span>
+                        <i class="button__icon fas fa-chevron-right"></i>
+                    </button>
+                </EditForm>
+
+            </div>
+            <div class="fondosPantalla">
+                <span class="screen__background__shape screen__background__shape4"></span>
+                <span class="screen__background__shape screen__background__shape3"></span>
+                <span class="screen__background__shape screen__background__shape2"></span>
+                <span class="screen__background__shape screen__background__shape1"></span>
             </div>
         </div>
     </div>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <LoadingComponent IsLoading="IsLoading" />
 

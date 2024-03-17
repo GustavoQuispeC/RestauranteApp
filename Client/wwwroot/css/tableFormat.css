@@ -14,14 +14,14 @@
     cursor: pointer;
 }
 
-.colorReset{
+.colorReset {
     color: darkgoldenrod;
 }
 
 .colorMenu {
     background-color: #006666;
-
 }
+
 .colorCarrito {
     color: #FFC107;
     background: none;
@@ -29,7 +29,72 @@
     padding: 0;
     cursor: pointer;
 }
+
 .tarjetaFooter {
-background-color: darkgray;
-    
+    background-color: darkgray;
+}
+
+
+
+
+/*Footer*/
+
+.footer {
+    background: #000;
+    padding: 2px 0px;
+    font-family: 'Play', sans-serif;
+    text-align: center;
+    font-size: 15px;
+    position: fixed; /* Posiciona el footer de forma fija */
+    bottom: 0; /* Lo coloca en la parte inferior */
+    width: 100%; /* Ajusta el ancho para que ocupe toda la pantalla */
+}
+
+    .footer .row_footer {
+        width: 100%;
+        margin: 1% 0%;
+        padding: 0.3% 0%;
+        color: gray;
+        font-size: 0.8em;
+    }
+
+        .footer .row_footer a {
+            text-decoration: none;
+            color: gray;
+            transition: 0.5s;
+        }
+
+            .footer .row_footer a:hover {
+                color: yellow;
+            }
+
+        .footer .row_footer ul {
+            width: 100%;
+        }
+
+            .footer .row_footer ul li {
+                display: inline-block;
+                margin: 0px 20px;
+            }
+
+        .footer .row_footer a i {
+            font-size: 2em;
+            margin: 0% 1%;
+        }
+
+@media (max-width: 720px) {
+    .footer {
+        text-align: left;
+        padding: 5%;
+    }
+
+        .footer .row_footer ul li {
+            display: block;
+            margin: 5px 0px;
+            text-align: left;
+        }
+
+        .footer .row_footer a i {
+            margin: 0% 3%;
+        }
 }
