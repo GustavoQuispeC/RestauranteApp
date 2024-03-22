@@ -123,8 +123,8 @@ namespace RestauranteApp.Server.Services
                         Nombres = request.NombreCompleto.Split(" ", StringSplitOptions.RemoveEmptyEntries).First(),
                         Apellidos = request.NombreCompleto.Split(" ", StringSplitOptions.RemoveEmptyEntries).Last(),
                         Email = request.Email,
-                        FechaNacimiento = request.FechaNacimiento,
-                        TipoClienteId = 1
+                        FechaNacimiento = request.FechaNacimiento
+                        
                     };
 
                     await _clienteRepository.AddAsync(cliente);
