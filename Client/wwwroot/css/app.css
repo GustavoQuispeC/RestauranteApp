@@ -4,6 +4,10 @@
 html, body {
     font-family: 'Montserrat', Helvetica, Arial, sans-serif;
 }
+body{
+    
+    margin-bottom: 800px;
+}
 
 h1:focus {
     outline: none;

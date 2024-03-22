@@ -24,7 +24,7 @@
             <div class="col-4">
                 @if (Categorias is not null)
                 {
-                    <select class="form-select" @onchange="OnSelectionChange">
+                    <select class="form-select" @onchange="OnSelectionChangeCategoria">
                         <option>-Categoria-</option>
                         @foreach (var categoria in Categorias)
                         {
@@ -37,7 +37,7 @@
             <div class="col-4">
                 @if (Marcas is not null)
                 {
-                    <select class="form-select" @onchange="OnSelectionChange">
+                    <select class="form-select" @onchange="OnSelectionChangeMarca">
                         <option>-Marca-</option>
                         @foreach (var marca in Marcas)
                         {
@@ -50,7 +50,7 @@
 
                 @if (Proveedores is not null)
                 {
-                    <select class="form-select" @onchange="OnSelectionChange">
+                    <select class="form-select" @onchange="OnSelectionChangeProveedor">
                         <option>-Proveedor-</option>
                         @foreach (var proveedor in Proveedores)
                         {
@@ -62,7 +62,7 @@
         </div>
     </div>
 
-    <div class="container bg-success mt-2 mb-4 text-warning" style="border-radius : 6px">
+    <div class="container bg-success fs-3 mt-2 mb-4 text-warning" style="border-radius : 6px">
         Apurate que se acaban...
     </div>
 </div>
@@ -118,7 +118,7 @@
     public bool IsLoading { get; set; }
 
 
-    private void OnSelectionChange(ChangeEventArgs args)
+    private void OnSelectionChangeCategoria(ChangeEventArgs args)
     {
         if (args.Value!.ToString()!.Contains("-"))
         {
@@ -129,16 +129,10 @@
             CategoriaSeleccionada = int.Parse(args.Value.ToString()!);
         }
 
-        //Verificar si la selección pertenece a la marca
-        if (args.Value!.ToString()!.Contains("-"))
-        {
-            MarcaSeleccionada = null;
-        }
-        else
-        {
-            MarcaSeleccionada = int.Parse(args.Value.ToString()!);
-        }
+    }  
 
+    private void OnSelectionChangeProveedor(ChangeEventArgs args)
+    {
         //Verificar si la selección pertenece al proveedor
         if (args.Value!.ToString()!.Contains("-"))
         {
@@ -147,6 +141,18 @@
         else
         {
             ProveedorSeleccionado = int.Parse(args.Value.ToString()!);
+        }
+    }
+    private void OnSelectionChangeMarca(ChangeEventArgs args)
+    {
+        //Verificar si la selección pertenece a la marca
+        if (args.Value!.ToString()!.Contains("-"))
+        {
+            MarcaSeleccionada = null;
+        }
+        else
+        {
+            MarcaSeleccionada = int.Parse(args.Value.ToString()!);
         }
     }
 
